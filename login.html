@@ -1,0 +1,49 @@
+<!--
+Fake login page
+Outline: form takes username and poassword, checks that username and
+password match. Should be easy since we only need to have one user, so for
+simplification, will just use a conditional to check password
+-->
+<title>Campus Grounds Inventory User Login</title>
+<body>
+<html>
+<center>
+Campus Grounds Inventory User Login<p>
+  For testing purposes. Use un - campusgrounds, pw - coffee. <p>
+<form id="f">
+Username:
+<input type="text" id ="un"><p>
+Password:
+<input type="text" id="pw"><p>
+  </form>
+<button onClick = "Login()"> Login </button> <p>
+<div id = "replace">
+Result should appear here. <br>
+</div>
+</center>
+</html>
+</body>
+<script>
+function Login(){
+  //hard code our accepted u/n and password first
+  var acceptedUN = "campusgrounds";
+  var acceptedPW = "coffee";
+  //next, get the values entered in the form
+  var username = document.forms["f"].elements["un"].value;
+  var password = document.forms["f"].elements["pw"].value;
+
+  var r = document.getElementById("replace");
+
+  //now check that the entries in the form match the un and pw we want
+  if(username==acceptedUN && password==acceptedPW){
+    //credentials match, so let them log in
+    r.innerHTML = "Login successful. (ideally this would then show inventory and allow user to make changes)";
+  }
+  else{
+    //don't match, so tell them it's invalid
+    r.innerHTML = "Invalid username or password.";
+  }
+}
+
+
+</script>
