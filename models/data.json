@@ -1,0 +1,12 @@
+//file: models/data.json
+{
+  "name": "CSC 331 Team",
+  "participants": [
+    {"id": 0, "name": "Paul", "role": "instructor"}
+    {"id": 1, "name": "Kayleigh", "role": "student"}
+    {"id": 2, "name": "Sydney", "role": "student"}
+    {"id": 3, "name": "Tyler", "role": "student"}
+    {"id": 4, "name": "Melanie", "role": "student"}
+    {"id": 5, "name": "Haley", "role": "student"}
+  ]
+};

@@ -8,20 +8,35 @@ var http = httpModule.Server(app);
 //Tells app that any assets (images, logos, etc.) will be found in a folder called assets
  app.use(express.static('assets'));
 
+ app.get('/about', (req, res)=>{
+   res.sendFile(__dirname + '/about.html');
+ });
 
- function responder(req, res){
-   //sending a file to the user's browswer
-   res.sendFile(__dirname + '/index.html');          //response is to send a file, dirname already exists when code is running, add file we want to send to computer
-   //print message in the server side console
-   console.log('got a request');
- }
+ app.get('/', (req, res) => {
+   res.sendFile(__dirname + '/index.html');
+   console.log('got a GET request');
+ });
 
-//Get request to / is given to responder function
-//whatever the website name, nothing else, just / as entry point
- app.get('/', responder);
 
  function portlistener(){
    console.log('Listening in on localhost' + port);
  }
  var port = process.env.PORT || 3000; // || = or
  http.listen(port, portlistener);
+
+ // Load the module
+ var modelTools = require('./models/dataTools.js');
+
+ // Set the view engine of the express app to ejs
+ app.set('view engine', 'ejs');
+
+ // Respond to GET request for target '/team'
+ var members;
+ app.get('/team', (req, res) => {
+   modelTools.readJsonFile('./models/data.json', (text) => {
+     members = text;
+     // data is specified in the team.ejs file and replaced with
+     // members.participants
+     res.render('team.ejs', {data: members.participants});
+   });
+ });
