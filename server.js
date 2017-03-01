@@ -40,3 +40,7 @@ var http = httpModule.Server(app);
      res.render('team.ejs', {data: members.participants});
    });
  });
+
+ app.post('/people', (req, res) => {
+   
+ })
