@@ -38,7 +38,8 @@ function Login(){
   //now check that the entries in the form match the un and pw we want
   if(username==acceptedUN && password==acceptedPW){
     //credentials match, so let them log in
-    r.innerHTML = "Login successful. (ideally this would then show inventory and allow user to make changes)";
+    //redirect to welcome.html
+    r.innerHTML = "<a href = '/welcome'>Welcome page</a>";
   }
   else{
     //don't match, so tell them it's invalid

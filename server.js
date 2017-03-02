@@ -15,6 +15,10 @@ var http = httpModule.Server(app);
   app.get('/login', (req, res)=>{
    res.sendFile(__dirname + '/login.html');
  });
+ 
+   app.get('/welcome', (req, res)=>{
+   res.sendFile(__dirname + '/welcome.html');
+ });
 
  app.get('/', (req, res) => {
    res.sendFile(__dirname + '/index.html');
