@@ -59,7 +59,7 @@ simplification, will just use a conditional to check password
 <center>
 <p>
 <!-- <form id="f"> -->
-<button onClick = "ShowCommands()"> Manage Inventory </button> <p>
+<button onClick = "gotoInventoryPage()"> Manage Inventory </button> <p>
 <div id = "replace">
 
 </div>
@@ -82,14 +82,18 @@ simplification, will just use a conditional to check password
 </html>
 </body>
 <script>
+function gotoInventoryPage(){
+  window.location='/manageInv';
+};
+
 function ShowCommands(){
-  //when command happens, add new buttons 
+  //when command happens, add new buttons
   var r = document.getElementById("replace");
   r.innerHTML = "<form><button> Add </button> <p><button> Delete </button> <p><button> Update </button></form>";
 }
 
 
-/* When the user clicks on the button, 
+/* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
 function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
