@@ -4,6 +4,8 @@ var httpModule = require('http');
 var bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient
 
+var productTable = "products";
+
 //create an express app, express is a function
 var app = express();
 //express will be the server for http object created
@@ -33,8 +35,18 @@ var http = httpModule.Server(app);
 
 //result - render manageInv.ejs
   app.get('/manageInv', (req, res)=>{
-    var results = 10;
+    // obtain data from movies into cursor object
+  var cursor = db.collection(productTable).find();
+  // console.log(cursor);  // This has too much info
+  // convert to an array to extract the movie data
+  cursor.toArray(function (err, results) {
+    if (err)
+      return console.log(err);
+
+    // Render index.ejs
     res.render('manageInv.ejs', {inventory: results});
+    console.log(results)
+  });
 
 });
 
@@ -46,7 +58,7 @@ var http = httpModule.Server(app);
 app.post('/addInv', (req, res) => {
   console.log("got POST request");
   console.log(req.body);
-  db.collection('products').save(req.body, (err, result) => {
+  db.collection(productTable).save(req.body, (err, result) => {
     if (err)
       return console.log(err);
     console.log('saved to database');

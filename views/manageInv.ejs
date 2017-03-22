@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Manage Inventory</title>
+</head>
+<body>
+  <h1>Inventory</h1>
+
+  <ul class="Inventory">
+     <% for(var i=0; i<inventory.length; i++) {%>
+       <li id="item<%=i%>">
+         <input type="text" name="productName" value="<%= inventory[i].productName %>" readonly>
+         <input type="text" name="quantity" value="<%= inventory[i].quantity %>" readonly>
+
+       </li>
+       <% } %>
+     </ul>
+
+  <form action="/addInv" method="POST">
+        <input type="text" placeholder="product name" name="productName">
+        <input type="text" placeholder="quantity" name="quantity">
+        <button type="submit">Submit</button>
+  </form>
+</body>
+</html>
