@@ -4,22 +4,176 @@ Outline: form takes username and poassword, checks that username and
 password match. Should be easy since we only need to have one user, so for
 simplification, will just use a conditional to check password
 -->
+
+<head>
 <title>Campus Grounds Inventory User Login</title>
-<body>
+</head>
+<style>
+#header{
+top:0px;
+left:0px;
+width: 100%;
+padding-left:30px;
+padding-top: 15px;
+padding-bottom: 15px;
+position: absolute;
+text-align: left;
+background-color: #59B2E0;
+color: #fff;
+}
+
+.link{
+  display: inline-block;
+  margin:10px;
+  text-align: center;
+  font-size: 8pt;
+  font-family: Arial;
+}
+.link a{
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+#links{
+  top:0px;
+  right: 0px;
+  padding: 10px;
+  position:absolute;
+}
+
+#loginform{
+  top: 150px;
+  position:relative;
+  width:400px;
+}
+h{
+  font-size: 16pt;
+  font-weight: bold;
+}
+
+sub{
+  font-size: 12px;
+  font-family: Arial;
+}
+
+/* bootstrap snippet css from http://bootsnipp.com/snippets/featured/login-and-register-tabbed-form
+(with minor modifications)*/
+
+body {
+    /* padding-top: 90px; */
+    font-family: sans-serif;
+    background-color: #efefef;
+}
+.panel-login {
+	border-color: #ccc;
+  padding: 10px;
+  background-color: #fff;
+	-webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+	-moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+	box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
+}
+.panel-login>.panel-heading {
+	color: #00415d;
+	background-color: #fff;
+	border-color: #fff;
+	text-align:center;
+}
+.panel-login>.panel-heading a{
+	text-decoration: none;
+	color: #666;
+	font-weight: bold;
+	font-size: 15px;
+	-webkit-transition: all 0.1s linear;
+	-moz-transition: all 0.1s linear;
+	transition: all 0.1s linear;
+}
+.panel-login>.panel-heading a.active{
+	color: #029f5b;
+	font-size: 18px;
+}
+.panel-login>.panel-heading hr{
+	margin-top: 10px;
+	margin-bottom: 0px;
+	clear: both;
+	border: 0;
+	height: 1px;
+	background-image: -webkit-linear-gradient(left,rgba(0, 0, 0, 0),rgba(0, 0, 0, 0.15),rgba(0, 0, 0, 0));
+	background-image: -moz-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+	background-image: -ms-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+	background-image: -o-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+}
+.panel-login input[type="text"],.panel-login input[type="email"],.panel-login input[type="password"] {
+	height: 35px;
+  width: 350px;
+  padding: 5px;
+  margin: 5px;
+	border: 1px solid #ddd;
+	font-size: 16px;
+	-webkit-transition: all 0.1s linear;
+	-moz-transition: all 0.1s linear;
+	transition: all 0.1s linear;
+}
+.panel-login input:hover,
+.panel-login input:focus {
+	outline:none;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	border-color: #ccc;
+}
+button {
+	background-color: #59B2E0;
+	outline: none;
+	color: #fff;
+	font-size: 14px;
+	height: auto;
+	font-weight: normal;
+	padding: 14px 0;
+	text-transform: uppercase;
+	border-color: #59B2E6;
+  width: 100px;
+}
+.btn-login:hover,
+.btn-login:focus {
+	color: #fff;
+	background-color: #53A3CD;
+	border-color: #53A3CD;
+}
+
+</style>
 <html>
+<body>
 <center>
-Campus Grounds Inventory User Login<p>
-  For testing purposes. Use un - campusgrounds, pw - coffee. <p>
-<a href="/about">About</a><p>
+<div id = "header">
+<h>Campus Grounds Inventory Manager</h><p>
+<sub>For testing purposes. Use un - campusgrounds, pw - coffee.</sub> <p>
+</div>
+<div id="links">
+  <div class="link"><a href="/about">About</a></div>
+  <div class="link"><a href="/manageInv">Manage Inventory</a></div>
+  <div class="link"><a href="/welcome">Welcome</a></div>
+</div>
+
+<div id="loginform">
+  <div class="panel panel-login">
+  					<div class="panel-heading">
+  						<div class="row">
+  							<h> Sign In </h>
+  					</div>
+            <p>
 <form id="f">
-Username:
-<input type="text" id ="un"><p>
-Password:
-<input type="text" id="pw"><p>
+<div class="form-group">
+<input type="text" id ="un" placeholder="Username">
+</div>
+  <div class="form-group">
+<input type="password" id="pw" placeholder="Password">
+</div>
   </form>
 <button onClick = "Login()"> Login </button> <p>
 <div id = "replace">
 Result should appear here. <br>
+</div>
 </div>
 </center>
 </html>
