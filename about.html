@@ -1,10 +1,110 @@
-<html>
-<head>
-<title>Welcome to Campus Grounds Inventory Page </title>
-<h1> About Page </h1>
-<body>
-  <h1> Team Members </h1>
-  <p> Written by Haley McCalpin, Sydney Rivers, Kayleigh O'Donnell, Melanie Ferreri, Tyler Bigelow <\p>
-</body>
-</head>
-</html>
+<html lang= "en">
+  <head>
+    <title>About Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+      #grad1 {
+        height: 800px;
+        background-size: cover;
+        background: blue; /* For browsers that do not support gradients */
+        background: -webkit-linear-gradient(left top, yellow, brown); /* For Safari 5.1 to 6.0 */
+        background: -o-linear-gradient(bottom right, blue, yellow); /* For Opera 11.1 to 12.0 */
+        background: -moz-linear-gradient(bottom right, blue, yellow); /* For Firefox 3.6 to 15 */
+        background: linear-gradient(#efefef, gray); /* Standard syntax (must be last) */
+        padding: 60px;
+      }
+
+      #nav {
+        background-color: #59B2E0;
+        color: black;
+      }
+      .nav.navbar-nav li a {
+        color: black;
+        font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+        text-transform: uppercase;
+      }
+
+      .navbar-header h {
+        color: black;
+        font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+      }
+
+      .navbar-header h:hover {
+        color: white;
+      }
+
+
+      @font-face {
+        font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+        /*src: url(sansation_light.woff);*/
+      }
+
+      div {
+        font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+      }
+      .center {
+        text-align: center;
+        text-shadow: 2px 2px 5px black;
+        padding-top: 60px;
+      }
+      .info {
+        text-align: center;
+        font-size: 1.25em;
+      }
+      .img {
+        text-align: center;
+        padding-top: 100px;
+      }
+    </style>
+  </head>
+
+
+  <body>
+    <div id="grad1">
+    <div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <h1 class="center"> About </h1>
+          <p class="info"> A website to manage Campus Grounds' inventory </p>
+          <h1 class="center">Team Members</h1>
+          <p class="info"><span class="glyphicon glyphicon-user"></span> Haley McCalpin </p>
+          <p class="info"><span class="glyphicon glyphicon-user"></span> Sydney Rivers </p>
+          <p class="info"><span class="glyphicon glyphicon-user"></span> Kayleigh O'Donnell </p>
+          <p class="info"><span class="glyphicon glyphicon-user"></span> Melanie Ferreri </p>
+          <p class="info"><span class="glyphicon glyphicon-user"></span> Tyler Bigelow </p>
+        </div>
+        <div class="img" class="col-sm-6">
+          <p> <img src="https://pbs.twimg.com/profile_images/378800000420896555/f1e846406bc7a02ae5fe44a75525603a_400x400.jpeg"></p>
+        </div>
+
+      </div>
+    </div>
+
+
+    <nav id= "nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <div id="navhead">
+          <a class="navbar-brand" href="#"><h>Campus Grounds Inventory Manager</h></a>
+        </div>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="active"><a href="about.html">About</a></li>
+          <li><a href="login.html">Login</a></li>
+          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Inventory<span class="caret">
+        </span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Add</a></li>
+            <li><a href="#">Delete</a></li>
+            <li><a href="#">Update</a></li>
+        </ul>
+      </li>
+    </div>
+
+  </body>
+
+  </html>
