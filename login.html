@@ -1,69 +1,73 @@
-<!--
-Fake login page
-Outline: form takes username and poassword, checks that username and
-password match. Should be easy since we only need to have one user, so for
-simplification, will just use a conditional to check password
--->
+<html lang= "en">
+  <head>
+    <title>About Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+      body {
+        /*height: 800px;*/
+        background-size: cover;
+        background: blue; /* For browsers that do not support gradients */
+        background: -webkit-linear-gradient(left top, yellow, brown); /* For Safari 5.1 to 6.0 */
+        background: -o-linear-gradient(bottom right, blue, yellow); /* For Opera 11.1 to 12.0 */
+        background: -moz-linear-gradient(bottom right, blue, yellow); /* For Firefox 3.6 to 15 */
+        background: linear-gradient(#efefef, gray); /* Standard syntax (must be last) */
+        padding: 60px;
+      }
 
-<head>
-<title>Campus Grounds Inventory User Login</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-<style>
+      #nav {
+        background-color: #59B2E0;
+        color: black;
+      }
+      .nav.navbar-nav li a {
+        color: black;
+        font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+        text-transform: uppercase;
+      }
 
-#nav {
-  background-color: #59B2E0;
-  color: black;
-}
-.nav.navbar-nav li a {
-  color: black;
-  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
-  text-transform: uppercase;
-}
+      .navbar-header h {
+        color: black;
+        font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+      }
 
-.navbar-header h {
-  color: black;
-  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
-}
+      .navbar-header h:hover {
+        color: white;
+      }
 
-.navbar-header h:hover {
-  color: white;
-}
 
-#loginform{
-  top: 150px;
-  position:relative;
-  width:400px;
-}
-h{
-  font-size: 16pt;
-  font-weight: bold;
-}
+      @font-face {
+        font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+        /*src: url(sansation_light.woff);*/
+      }
 
-sub{
-  font-size: 12px;
-  font-family: Arial;
-}
+      div {
+        font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+      }
+      .center {
+        text-align: center;
+        text-shadow: 2px 2px 5px black;
+        padding-top: 60px;
+      }
+      .info {
+        text-align: center;
+        font-size: 1.25em;
+      }
+      .img {
+        text-align: center;
+        padding-top: 100px;
+      }
 
-/* bootstrap snippet css from http://bootsnipp.com/snippets/featured/login-and-register-tabbed-form
-(with minor modifications)*/
-
-body {
-    /* padding-top: 90px; */
-    font-family: sans-serif;
-    background-color: #efefef;
-}
-.panel-login {
+      .panel-login {
+        margin-top:50px;
 	border-color: #ccc;
-  padding: 10px;
-  background-color: #fff;
 	-webkit-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
 	-moz-box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
 	box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.2);
 }
+
+
 .panel-login>.panel-heading {
 	color: #00415d;
 	background-color: #fff;
@@ -95,10 +99,7 @@ body {
 	background-image: -o-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
 }
 .panel-login input[type="text"],.panel-login input[type="email"],.panel-login input[type="password"] {
-	height: 35px;
-  width: 350px;
-  padding: 5px;
-  margin: 5px;
+	height: 45px;
 	border: 1px solid #ddd;
 	font-size: 16px;
 	-webkit-transition: all 0.1s linear;
@@ -113,7 +114,7 @@ body {
 	box-shadow: none;
 	border-color: #ccc;
 }
-button {
+.btn-login {
 	background-color: #59B2E0;
 	outline: none;
 	color: #fff;
@@ -123,7 +124,6 @@ button {
 	padding: 14px 0;
 	text-transform: uppercase;
 	border-color: #59B2E6;
-  width: 100px;
 }
 .btn-login:hover,
 .btn-login:focus {
@@ -132,76 +132,114 @@ button {
 	border-color: #53A3CD;
 }
 
-</style>
-<html>
-<body>
-<center>
-  <nav id= "nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <div id="navhead">
-        <a class="navbar-brand" href="#"><h>Campus Grounds Inventory Manager</h></a>
-      </div>
-      </div>
-      <ul class="nav navbar-nav navbar-right">
-        <li class="active"><a href="about.html">About</a></li>
-        <li><a href="login.html">Login</a></li>
-        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Inventory<span class="caret">
-      </span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Add</a></li>
-          <li><a href="#">Delete</a></li>
-          <li><a href="#">Update</a></li>
-      </ul>
-    </li>
-  </div>
 
-<div id="loginform">
-  <div class="panel panel-login">
-  					<div class="panel-heading">
-  						<div class="row">
-  							<h> Sign In </h>
-                <p> Username: campusgrounds Password: coffee </p>
-  					</div>
-            <p>
-<form id="f">
-<div class="form-group">
-<input type="text" id ="un" placeholder="Username">
-</div>
-  <div class="form-group">
-<input type="password" id="pw" placeholder="Password">
-</div>
-  </form>
-<button onClick = "Login()"> Login </button> <p>
-<div id = "replace">
-Result should appear here. <br>
-</div>
-</div>
-</center>
-</body>
-</html>
-<script>
-function Login(){
-  //hard code our accepted u/n and password first
-  var acceptedUN = "campusgrounds";
-  var acceptedPW = "coffee";
-  //next, get the values entered in the form
-  var username = document.forms["f"].elements["un"].value;
-  var password = document.forms["f"].elements["pw"].value;
+    </style>
+  </head>
 
-  var r = document.getElementById("replace");
 
-  //now check that the entries in the form match the un and pw we want
-  if(username==acceptedUN && password==acceptedPW){
-    //credentials match, so let them log in
-    //redirect to welcome.html
-    r.innerHTML = "<a href = '/welcome'>Welcome page</a>";
+  <body>
+    <div>
+
+
+      <div class="container">
+          	<div class="row">
+      			<div class="col-md-6 col-md-offset-3">
+      				<div class="panel panel-login">
+      					<div class="panel-heading">
+      						<div class="row">
+
+      								<a href="#" class="active" id="login-form-link">Login</a>
+
+      						</div>
+      						<hr>
+      					</div>
+      					<div class="panel-body">
+      						<div class="row">
+      							<div class="col-lg-12">
+      								<form id="f" onsubmit="Login()" method="post" role="form" style="display: block;">
+      									<div class="form-group">
+      										<input type="text" name="username" id="un" tabindex="1" class="form-control" placeholder="Username" value="">
+      									</div>
+      									<div class="form-group">
+      										<input type="password" name="password" id="pw" tabindex="2" class="form-control" placeholder="Password">
+      									</div>
+</form>
+      									<div class="form-group">
+      										<div class="row">
+
+      											<div class="col-sm-6 col-sm-offset-3">
+      												<input type="submit" onClick="Login()" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
+      											</div>
+      										</div>
+      									</div>
+      									<div class="form-group">
+      										<div class="row">
+
+      										</div>
+  <center>
+                          <div id="replace">
+
+                            New text goes here
+                          </div>
+  </center>
+      									</div>
+
+      							</div>
+      						</div>
+      					</div>
+      				</div>
+      			</div>
+      		</div>
+      	</div>
+
+
+    <nav id= "nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <div id="navhead">
+          <a class="navbar-brand" href="#"><h>Campus Grounds Inventory Manager</h></a>
+        </div>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="active"><a href="about.html">About</a></li>
+          <li><a href="login.html">Login</a></li>
+          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Inventory<span class="caret">
+        </span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Add</a></li>
+            <li><a href="#">Delete</a></li>
+            <li><a href="#">Update</a></li>
+        </ul>
+      </li>
+
+  </body>
+
+  </html>
+
+
+  <script>
+  function Login(){
+    //hard code our accepted u/n and password first
+    var acceptedUN = "campusgrounds";
+    var acceptedPW = "coffee";
+    //next, get the values entered in the form
+    var username = document.forms["f"].elements["un"].value;
+    var password = document.forms["f"].elements["pw"].value;
+
+    var r = document.getElementById("replace");
+
+    //now check that the entries in the form match the un and pw we want
+    if(username==acceptedUN && password==acceptedPW){
+      //credentials match, so let them log in
+      //redirect to welcome.html
+      r.innerHTML = "<a href = '/welcome'>Welcome page</a>";
+    }
+    else{
+      //don't match, so tell them it's invalid
+      r.innerHTML = "Invalid username or password.";
+    }
   }
-  else{
-    //don't match, so tell them it's invalid
-    r.innerHTML = "Invalid username or password.";
-  }
-}
 
 
-</script>
+
+  </script>
