@@ -7,39 +7,30 @@ simplification, will just use a conditional to check password
 
 <head>
 <title>Campus Grounds Inventory User Login</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <style>
-#header{
-top:0px;
-left:0px;
-width: 100%;
-padding-left:30px;
-padding-top: 15px;
-padding-bottom: 15px;
-position: absolute;
-text-align: left;
-background-color: #59B2E0;
-color: #fff;
-}
 
-.link{
-  display: inline-block;
-  margin:10px;
-  text-align: center;
-  font-size: 8pt;
-  font-family: Arial;
+#nav {
+  background-color: #59B2E0;
+  color: black;
 }
-.link a{
-  color: #fff;
-  text-decoration: none;
+.nav.navbar-nav li a {
+  color: black;
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
   text-transform: uppercase;
 }
 
-#links{
-  top:0px;
-  right: 0px;
-  padding: 10px;
-  position:absolute;
+.navbar-header h {
+  color: black;
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+}
+
+.navbar-header h:hover {
+  color: white;
 }
 
 #loginform{
@@ -145,21 +136,32 @@ button {
 <html>
 <body>
 <center>
-<div id = "header">
-<h>Campus Grounds Inventory Manager</h><p>
-<sub>For testing purposes. Use un - campusgrounds, pw - coffee.</sub> <p>
-</div>
-<div id="links">
-  <div class="link"><a href="/about">About</a></div>
-  <div class="link"><a href="/manageInv">Manage Inventory</a></div>
-  <div class="link"><a href="/welcome">Welcome</a></div>
-</div>
+  <nav id= "nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <div id="navhead">
+        <a class="navbar-brand" href="#"><h>Campus Grounds Inventory Manager</h></a>
+      </div>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active"><a href="about.html">About</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Inventory<span class="caret">
+      </span></a>
+        <ul class="dropdown-menu">
+          <li><a href="#">Add</a></li>
+          <li><a href="#">Delete</a></li>
+          <li><a href="#">Update</a></li>
+      </ul>
+    </li>
+  </div>
 
 <div id="loginform">
   <div class="panel panel-login">
   					<div class="panel-heading">
   						<div class="row">
   							<h> Sign In </h>
+                <p> Username: campusgrounds Password: coffee </p>
   					</div>
             <p>
 <form id="f">
@@ -176,8 +178,8 @@ Result should appear here. <br>
 </div>
 </div>
 </center>
-</html>
 </body>
+</html>
 <script>
 function Login(){
   //hard code our accepted u/n and password first
