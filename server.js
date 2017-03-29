@@ -47,6 +47,8 @@ var http = httpModule.Server(app);
     res.render('manageInv.ejs', {inventory: results});
     console.log(results)
   });
+});
+//result - render manageInv.ejs
   app.get('/manageVen', (req, res)=>{
     // obtain data from movies into cursor object
   var cursor = db.collection(productTable).find();
@@ -61,7 +63,6 @@ var http = httpModule.Server(app);
     console.log(results)
   });
 });
-
  app.get('/', (req, res) => {
    res.sendFile(__dirname + '/index.html');
    console.log('got a GET request');

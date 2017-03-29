@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Manage Vendors</title>
+</head>
+<body>
+  <h1>Vendors</h1>
+
+  <ul class="Vendors">
+     <% for(var i=0; i<vendors.length; i++) {%>
+       <li id="item<%=i%>">
+         <input type="text" name="vendorName" value="<%= vendor[i].vendorName %>" readonly>
+         <input type="text" name="product" value="<%= vendor[i].product %>" readonly>
+
+       </li>
+       <% } %>
+     </ul>
+
+  <form action="/addVen" method="POST">
+        <input type="text" placeholder="vendor name" name="vendorName">
+        <input type="text" placeholder="product" name="product">
+        <button type="submit">Submit</button>
+  </form>
+</body>
+</html>
