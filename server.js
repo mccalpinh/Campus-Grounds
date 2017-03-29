@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient
 
 var productTable = "products";
+var vendorTable = "Vendors";
 
 //create an express app, express is a function
 var app = express();
@@ -51,7 +52,7 @@ app.get('/manageInv', (req, res)=>{
 //result - render manageInv.ejs
 app.get('/manageVen', (req, res)=>{
     // obtain data from movies into cursor object
-  var cursor = db.collection(productTable).find();
+  var cursor = db.collection(vendorTable).find();
   // console.log(cursor);  // This has too much info
   // convert to an array to extract the movie data
   cursor.toArray(function (err, results) {
@@ -59,7 +60,7 @@ app.get('/manageVen', (req, res)=>{
       return console.log(err);
 
     // Render index.ejs
-    res.render('manageVen.ejs', {inventory: results});
+    res.render('manageVen.ejs', {vendor: results});
     console.log(results)
   });
 });
