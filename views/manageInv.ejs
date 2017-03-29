@@ -12,6 +12,7 @@
        <li id="item<%=i%>">
          <input type="text" name="productName" value="<%= inventory[i].productName %>" readonly>
          <input type="text" name="quantity" value="<%= inventory[i].quantity %>" readonly>
+         <input type="text" name="vendor" value="<%= inventory[i].vendor %>" readonly>
 
        </li>
        <% } %>
@@ -20,6 +21,7 @@
   <form action="/addInv" method="POST">
         <input type="text" placeholder="product name" name="productName">
         <input type="text" placeholder="quantity" name="quantity">
+        <input type="text" placeholder="vendor" name="vendor">
         <button type="submit">Submit</button>
   </form>
 </body>

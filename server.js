@@ -47,7 +47,19 @@ var http = httpModule.Server(app);
     res.render('manageInv.ejs', {inventory: results});
     console.log(results)
   });
+  app.get('/manageVen', (req, res)=>{
+    // obtain data from movies into cursor object
+  var cursor = db.collection(productTable).find();
+  // console.log(cursor);  // This has too much info
+  // convert to an array to extract the movie data
+  cursor.toArray(function (err, results) {
+    if (err)
+      return console.log(err);
 
+    // Render index.ejs
+    res.render('manageVen.ejs', {inventory: results});
+    console.log(results)
+  });
 });
 
  app.get('/', (req, res) => {
