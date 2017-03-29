@@ -204,14 +204,6 @@
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/about">About</a></li>
           <li class="active"><a href="/login">Login</a></li>
-          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Inventory<span class="caret">
-        </span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Add</a></li>
-            <li><a href="#">Delete</a></li>
-            <li><a href="#">Update</a></li>
-        </ul>
-      </li>
 
   </body>
 
@@ -233,7 +225,7 @@
     if(username==acceptedUN && password==acceptedPW){
       //credentials match, so let them log in
       //redirect to welcome.html
-      window.location.replace("welcome");
+      window.location.replace("manageInv");
     }
     else{
       //don't match, so tell them it's invalid

@@ -11,7 +11,6 @@
      <% for(var i=0; i<vendor.length; i++) {%>
        <li id="item<%=i%>">
          <input type="text" name="vendorName" value="<%= vendor[i].vendorName %>" readonly>
-         <input type="text" name="product" value="<%= vendor[i].product %>" readonly>
 
        </li>
        <% } %>
@@ -19,7 +18,6 @@
 
   <form action="/addVen" method="POST">
         <input type="text" placeholder="vendor name" name="vendorName">
-        <input type="text" placeholder="product" name="product">
         <button type="submit">Submit</button>
   </form>
 </body>
