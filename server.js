@@ -34,7 +34,7 @@ var http = httpModule.Server(app);
  });
 
 //result - render manageInv.ejs
-  app.get('/manageInv', (req, res)=>{
+app.get('/manageInv', (req, res)=>{
     // obtain data from movies into cursor object
   var cursor = db.collection(productTable).find();
   // console.log(cursor);  // This has too much info
@@ -49,7 +49,7 @@ var http = httpModule.Server(app);
   });
 });
 //result - render manageInv.ejs
-  app.get('/manageVen', (req, res)=>{
+app.get('/manageVen', (req, res)=>{
     // obtain data from movies into cursor object
   var cursor = db.collection(productTable).find();
   // console.log(cursor);  // This has too much info
@@ -63,6 +63,7 @@ var http = httpModule.Server(app);
     console.log(results)
   });
 });
+
  app.get('/', (req, res) => {
    res.sendFile(__dirname + '/index.html');
    console.log('got a GET request');
@@ -76,6 +77,17 @@ app.post('/addInv', (req, res) => {
       return console.log(err);
     console.log('saved to database');
     res.redirect('/manageInv');
+  });
+});
+
+app.post('/addVen', (req, res) => {
+  console.log("got POST request");
+  console.log(req.body);
+  db.collection(productTable).save(req.body, (err, result) => {
+    if (err)
+      return console.log(err);
+    console.log('saved to database');
+    res.redirect('/manageVen');
   });
 });
 
