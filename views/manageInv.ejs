@@ -78,8 +78,9 @@
   <ul class="Vendors">
      <% for(var i=0; i<vendor.length; i++) {%>
        <li id="item<%=i%>">
-         <input type="display" name="vendorName" value="<%= vendor[i].vendorName %>" readonly>
          <input type = "button" id = <%= "b" + i %> onclick="Expand(<%= i %>)" value="+">
+         <input type="display" name="vendorName" value="<%= vendor[i].vendorName %>" readonly>
+
          <div id = <%= i %> class="hidden">
          <ul class="Inventory">
             <% for(var j=0; j<inventory.length; j++) {%>
@@ -87,6 +88,8 @@
               <li id="item<%=j%>">
                 <input type="display" name="productName" value="<%= inventory[j].productName %>" readonly>
                 Quantity: <input type="display" name="quantity" value="<%= inventory[j].quantity %>" readonly>
+            <!--    <input type = "button" id = <%= "b" + i + "," + j %> onclick="Expand(<%= i +","+j %>)" value="edit">
+                <input type = "button" id = <%= "b" + i + "," + j %> onclick="Delete(<%= i +","+j %>)" value="delete"> -->
               </li>
             <% } %>
               <% } %>
@@ -134,7 +137,7 @@
     //if(c % 2 == 0){
       s.className = "display";
     //}
-    document.getElementById("b" + i).value = " - ";
+    document.getElementById("b" + i).value = "–";
     document.getElementById("b" + i).onclick = function() { Close(i); };
 
   }
