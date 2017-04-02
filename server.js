@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient
 
 var productTable = "products";
+var vendorTable = "Vendors";
 
 //create an express app, express is a function
 var app = express();
@@ -34,9 +35,36 @@ var http = httpModule.Server(app);
  });
 
 //result - render manageInv.ejs
-  app.get('/manageInv', (req, res)=>{
+app.get('/manageInv', (req, res)=>{
     // obtain data from movies into cursor object
   var cursor = db.collection(productTable).find();
+  var c2 = db.collection(vendorTable).find();
+  // console.log(cursor);  // This has too much info
+  // convert to an array to extract the movie data
+  cursor.toArray(function (err, results) {
+    if (err)
+      return console.log(err);
+
+
+    c2.toArray(function (err, c2results) {
+      if (err)
+        return console.log(err);
+
+      // Render index.ejs
+      res.render('manageInv.ejs', {vendor: c2results, inventory: results});
+      console.log(results);
+
+    });
+
+  });
+
+});
+//result - render manageInv.ejs
+
+
+app.get('/manageVen', (req, res)=>{
+    // obtain data from movies into cursor object
+  var cursor = db.collection(vendorTable).find();
   // console.log(cursor);  // This has too much info
   // convert to an array to extract the movie data
   cursor.toArray(function (err, results) {
@@ -44,14 +72,13 @@ var http = httpModule.Server(app);
       return console.log(err);
 
     // Render index.ejs
-    res.render('manageInv.ejs', {inventory: results});
+    res.render('manageVen.ejs', {vendor: results});
     console.log(results)
   });
-
 });
 
  app.get('/', (req, res) => {
-   res.sendFile(__dirname + '/index.html');
+   res.sendFile(__dirname + '/login.html');
    console.log('got a GET request');
  });
 
@@ -63,6 +90,17 @@ app.post('/addInv', (req, res) => {
       return console.log(err);
     console.log('saved to database');
     res.redirect('/manageInv');
+  });
+});
+
+app.post('/addVen', (req, res) => {
+  console.log("got POST request");
+  console.log(req.body);
+  db.collection(vendorTable).save(req.body, (err, result) => {
+    if (err)
+      return console.log(err);
+    console.log('saved to database');
+    res.redirect('/manageVen');
   });
 });
 

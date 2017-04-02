@@ -1,26 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+
+
   <meta charset="UTF-8">
   <title>Manage Inventory</title>
+
+
+
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <style>
+        body {
+          /*height: 800px;*/
+      /*    background-size: cover;
+          background: blue; /* For browsers that do not support gradients */
+    /*      background: -webkit-linear-gradient(left top, yellow, brown); /* For Safari 5.1 to 6.0 */
+    /*      background: -o-linear-gradient(bottom right, blue, yellow); /* For Opera 11.1 to 12.0 */
+      /*    background: -moz-linear-gradient(bottom right, blue, yellow); /* For Firefox 3.6 to 15 */
+      /*    background: linear-gradient(#efefef, gray); /* Standard syntax (must be last) */
+          background-color: #ccc;
+          padding: 60px;
+        }
+
+        #nav {
+          background-color: #59B2E0;
+          color: black;
+        }
+        .nav.navbar-nav li a {
+          color: black;
+          font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+          text-transform: uppercase;
+        }
+
+        .navbar-header h {
+          color: black;
+          font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+        }
+
+        .navbar-header h:hover {
+          color: white;
+        }
+
+
+        @font-face {
+          font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+          /*src: url(sansation_light.woff);*/
+        }
+
+        input[type="display"] {
+            width: 150px;
+            display: inline-block;
+            padding-left: 10px;
+            padding-right: 10px;
+            background: none;
+            border: none;
+          }
+
+        .hidden{
+          height: 0px;
+        }
+
+        .display{
+          height: auto;
+        }
+
+
+      </style>
 </head>
 <body>
   <h1>Inventory</h1>
 
-  <ul class="Inventory">
-     <% for(var i=0; i<inventory.length; i++) {%>
-       <li id="item<%=i%>">
-         <input type="text" name="productName" value="<%= inventory[i].productName %>" readonly>
-         <input type="text" name="quantity" value="<%= inventory[i].quantity %>" readonly>
 
+  <ul class="Vendors">
+     <% for(var i=0; i<vendor.length; i++) {%>
+       <li id="item<%=i%>">
+         <input type = "button" id = <%= "b" + i %> onclick="Expand(<%= i %>)" value="+">
+         <input type="display" name="vendorName" value="<%= vendor[i].vendorName %>" readonly>
+
+         <div id = <%= i %> class="hidden">
+         <ul class="Inventory">
+            <% for(var j=0; j<inventory.length; j++) {%>
+              <% if (inventory[j].vendor == vendor[i].vendorName ) { %>
+              <li id="item<%=j%>">
+                <input type="display" name="productName" value="<%= inventory[j].productName %>" readonly>
+                Quantity: <input type="display" name="quantity" value="<%= inventory[j].quantity %>" readonly>
+            <!--    <input type = "button" id = <%= "b" + i + "," + j %> onclick="Expand(<%= i +","+j %>)" value="edit">
+                <input type = "button" id = <%= "b" + i + "," + j %> onclick="Delete(<%= i +","+j %>)" value="delete"> -->
+              </li>
+            <% } %>
+              <% } %>
+            </ul>
+          </div>
        </li>
        <% } %>
      </ul>
 
+
+
   <form action="/addInv" method="POST">
         <input type="text" placeholder="product name" name="productName">
         <input type="text" placeholder="quantity" name="quantity">
+      <!--  <input type="text" placeholder="vendor" name="vendor"> -->
+      Vendor:
+        <select placeholder="vendor" name="vendor">
+          <% for(var i=0; i<vendor.length; i++) {%>
+          <option value="<%= vendor[i].vendorName %>" > <%= vendor[i].vendorName %> </option>
+          <% } %>
+        </select>
         <button type="submit">Submit</button>
   </form>
+
+
+  <nav id= "nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <div id="navhead">
+        <a class="navbar-brand" href="#"><h>Campus Grounds Inventory Manager</h></a>
+      </div>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active"><a href="/manageInv">Manage Inventory</a></li>
+        <li><a href="/manageVen">Manage Vendors</a></li>
+
 </body>
 </html>
+
+<script>
+  function Expand(i){
+    var c = 0;
+    var index = i;
+    var s = document.getElementById(index);
+    //if(c % 2 == 0){
+      s.className = "display";
+    //}
+    document.getElementById("b" + i).value = "–";
+    document.getElementById("b" + i).onclick = function() { Close(i); };
+
+  }
+
+  function Close(i){
+      var index = i;
+      var s = document.getElementById(index);
+      s.className = "hidden";
+      document.getElementById("b" + i).value = "+";
+      document.getElementById("b" + i).onclick = function() { Expand(i); };
+    }
+</script>

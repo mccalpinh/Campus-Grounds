@@ -9,7 +9,7 @@
       body {
         /*height: 800px;*/
         background-size: cover;
-        background: blue; /* For browsers that do not support gradients */
+        background-color: #ccc; /* For browsers that do not support gradients */
         background: -webkit-linear-gradient(left top, yellow, brown); /* For Safari 5.1 to 6.0 */
         background: -o-linear-gradient(bottom right, blue, yellow); /* For Opera 11.1 to 12.0 */
         background: -moz-linear-gradient(bottom right, blue, yellow); /* For Firefox 3.6 to 15 */
@@ -84,7 +84,7 @@
 	transition: all 0.1s linear;
 }
 .panel-login>.panel-heading a.active{
-	color: #029f5b;
+	color: #59B2E0;
 	font-size: 18px;
 }
 .panel-login>.panel-heading hr{
@@ -148,7 +148,7 @@
       					<div class="panel-heading">
       						<div class="row">
 
-      								<a href="#" class="active" id="login-form-link">Login</a>
+      								<a class="active" id="login-form-link">Login</a>
 
       						</div>
       						<hr>
@@ -157,6 +157,7 @@
       						<div class="row">
       							<div class="col-lg-12">
       								<form id="f" onsubmit="Login()" method="post" role="form" style="display: block;">
+                        <p>Username: campusgrounds Password: coffee</p>
       									<div class="form-group">
       										<input type="text" name="username" id="un" tabindex="1" class="form-control" placeholder="Username" value="">
       									</div>
@@ -179,7 +180,7 @@
   <center>
                           <div id="replace">
 
-                            New text goes here
+
                           </div>
   </center>
       									</div>
@@ -201,16 +202,8 @@
         </div>
         </div>
         <ul class="nav navbar-nav navbar-right">
-          <li class="active"><a href="about.html">About</a></li>
-          <li><a href="login.html">Login</a></li>
-          <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Manage Inventory<span class="caret">
-        </span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Add</a></li>
-            <li><a href="#">Delete</a></li>
-            <li><a href="#">Update</a></li>
-        </ul>
-      </li>
+          <li><a href="/about">About</a></li>
+          <li class="active"><a href="/login">Login</a></li>
 
   </body>
 
@@ -232,7 +225,7 @@
     if(username==acceptedUN && password==acceptedPW){
       //credentials match, so let them log in
       //redirect to welcome.html
-      r.innerHTML = "<a href = '/welcome'>Welcome page</a>";
+      window.location.replace("manageInv");
     }
     else{
       //don't match, so tell them it's invalid
