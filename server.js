@@ -82,6 +82,18 @@ app.get('/manageVen', (req, res)=>{
    console.log('got a GET request');
  });
 
+
+app.post('/update', (req, res) => {
+  console.log(req.body);
+  console.log(ids[req.body.num])
+  db.collection(productTable).update(
+    {_id: ids[req.body.num]}, // _id of element to be updated
+    {$set: {productName: req.body.productName, quantity: req.body.quantity, vendor: req.body.vendor}}
+    , (result) => {
+    //  res.redirect('/manageInv');  // update the page
+    });
+});
+
 app.post('/addInv', (req, res) => {
   console.log("got POST request");
   console.log(req.body);
@@ -126,6 +138,8 @@ app.post('/addVen', (req, res) => {
 
 
   var db;
+  // The ids of current entries in the database are keep in array ids.
+  var ids = new Array();
 
   var port = process.env.PORT || 3000; // || = or
   MongoClient.connect('mongodb://cguser:coffee1834@ds113680.mlab.com:13680/campusgrounds',
@@ -135,7 +149,25 @@ app.post('/addVen', (req, res) => {
 
   db = database;
 
+  updateIds((result)=>{
+      console.log(result);
+    });
+
   http.listen( port, function () {
     console.log('Listening on localhost ' + port);
   });
 });
+
+function updateIds(callback) {
+  var cursor = db.collection(productTable).find();
+  cursor.toArray(function (err, results) {
+    if (err)
+    return console.log(err);
+
+    for (var i = 0; i < results.length; i++) {
+      ids.push(results[i]._id);
+    }
+    if (typeof callback != 'undefined')
+      callback(ids);
+  });
+}

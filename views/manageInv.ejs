@@ -60,6 +60,7 @@
             border: none;
           }
 
+
         .hidden{
           height: 0px;
         }
@@ -74,10 +75,10 @@
 <body>
   <h1>Inventory</h1>
 
-
-  <ul class="Vendors">
+<!-- here 'j' is a absolute/unique variable so it refers to the index of the product in the product collection-->
+  <div class="Vendors">
      <% for(var i=0; i<vendor.length; i++) {%>
-       <li id="item<%=i%>">
+       <div id="item<%=i%>">
          <input type = "button" id = <%= "b" + i %> onclick="Expand(<%= i %>)" value="+">
          <input type="display" name="vendorName" value="<%= vendor[i].vendorName %>" readonly>
 
@@ -86,18 +87,26 @@
             <% for(var j=0; j<inventory.length; j++) {%>
               <% if (inventory[j].vendor == vendor[i].vendorName ) { %>
               <li id="item<%=j%>">
-                <input type="display" name="productName" value="<%= inventory[j].productName %>" readonly>
-                Quantity: <input type="display" name="quantity" value="<%= inventory[j].quantity %>" readonly>
+                <form id="<%= 'form'+j %>" action="/updateordelete" method="post">
+                  <input type="hidden" name="num" value="<%= j %>">
+                  <input type="hidden" name="vendor" value="<%= vendor[i].vendorName %>">
+                  <input type="hidden" name="type" value="update">
+                <input type="display" id="<%= 'productName'+j %>" name="productName" value="<%= inventory[j].productName %>" readonly>
+                Quantity: <input type="display" id="<%= 'quantity'+j %>" name="quantity" value="<%= inventory[j].quantity %>" readonly>
             <!--    <input type = "button" id = <%= "b" + i + "," + j %> onclick="Expand(<%= i +","+j %>)" value="edit">
                 <input type = "button" id = <%= "b" + i + "," + j %> onclick="Delete(<%= i +","+j %>)" value="delete"> -->
+                <button type="button" id= <%= 'edit' + j %> onclick="edit(this)">Edit</button>
+                <button type="button" id= <%= 'delete' + j %> onclick="deleteProduct(this)">Delete</button>
+
+              </form>
               </li>
             <% } %>
               <% } %>
             </ul>
           </div>
-       </li>
+       </div>
        <% } %>
-     </ul>
+     </div>
 
 
 
@@ -149,4 +158,49 @@
       document.getElementById("b" + i).value = "+";
       document.getElementById("b" + i).onclick = function() { Expand(i); };
     }
+
+
+  var content = [];
+
+    function edit(button) {
+          // get the number in the button id. It matches the number in the id of the
+          // input element we need
+          var rownum = button.id.match(/\d+/)[0];  // Extract the number from string 'editNUM'
+          var productInput = document.getElementById('productName'+rownum);
+          var quantityInput = document.getElementById('quantity'+rownum);
+          if (button.innerHTML == "Done") {
+            productInput.readOnly = true;
+            quantityInput.readOnly = true;
+            // if the content was edited then update the database
+            if (content[rownum].product != productInput.value || content[rownum].quantity != quantityInput.value) {
+              var form = document.getElementById('form'+rownum);
+              form.submit();
+              console.log('submitted form');
+            }
+            productInput.style.background = "none";
+            quantityInput.style.background = "none";
+            button.innerHTML = "Edit";
+          }
+          else {
+            // get the content of titleInput and ratingInput
+            content[rownum] = {product: productInput.value, quantity: quantityInput.value};
+            console.log(content[rownum]);
+            // make this input element editable
+            productInput.readOnly = false;
+            quantityInput.readOnly = false;
+            productInput.style.backgroundColor = "yellow";
+            quantityInput.style.backgroundColor = "yellow";
+            button.innerHTML = "Done";
+          }
+};
+
+  function deleteProduct(button){
+    var rownum = button.id.match(/\d+/)[0];  // Extract the number from string 'editNUM'
+    var type = document.getElementById('type'+rownum);
+    //type.value = 'delete';
+    var form = document.getElementById('form'+rownum);
+    form.submit();
+    console.log('submitted form');
+  }
+
 </script>
