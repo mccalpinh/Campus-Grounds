@@ -60,6 +60,7 @@
             border: none;
           }
 
+
         .hidden{
           height: 0px;
         }
@@ -75,9 +76,9 @@
   <h1>Inventory</h1>
 
 <!-- here 'j' is a absolute/unique variable so it refers to the index of the product in the product collection-->
-  <ul class="Vendors">
+  <div class="Vendors">
      <% for(var i=0; i<vendor.length; i++) {%>
-       <li id="item<%=i%>">
+       <div id="item<%=i%>">
          <input type = "button" id = <%= "b" + i %> onclick="Expand(<%= i %>)" value="+">
          <input type="display" name="vendorName" value="<%= vendor[i].vendorName %>" readonly>
 
@@ -103,9 +104,9 @@
               <% } %>
             </ul>
           </div>
-       </li>
+       </div>
        <% } %>
-     </ul>
+     </div>
 
 
 
@@ -176,8 +177,8 @@
               form.submit();
               console.log('submitted form');
             }
-            productInput.style.backgroundColor = "white";
-            quantityInput.style.backgroundColor = "white";
+            productInput.style.background = "none";
+            quantityInput.style.background = "none";
             button.innerHTML = "Edit";
           }
           else {
