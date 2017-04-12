@@ -90,7 +90,7 @@
                 <form id="<%= 'form'+j %>" action="/updateordelete" method="post">
                   <input type="hidden" name="num" value="<%= j %>">
                   <input type="hidden" name="vendor" value="<%= vendor[i].vendorName %>">
-                  <input type="hidden" id="type" value="update">
+                  <input type="hidden" id="<%= "type" + j %>" value="update" name = "operationType">
                 <input type="display" id="<%= 'productName'+j %>" name="productName" value="<%= inventory[j].productName %>" readonly>
                 Quantity: <input type="display" id="<%= 'quantity'+j %>" name="quantity" value="<%= inventory[j].quantity %>" readonly>
             <!--    <input type = "button" id = <%= "b" + i + "," + j %> onclick="Expand(<%= i +","+j %>)" value="edit">
@@ -197,12 +197,15 @@
 };
 
   function deleteProduct(button){
+    var p = confirm("Are you sure?");
+    if (p){
     var rownum = button.id.match(/\d+/)[0];  // Extract the number from string 'editNUM'
     var type = document.getElementById('type'+rownum);
     type.value = "delete";
     var form = document.getElementById('form'+rownum);
     form.submit();
     console.log('submitted form');
+  }
   }
 
 </script>

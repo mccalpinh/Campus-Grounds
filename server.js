@@ -86,12 +86,22 @@ app.get('/manageVen', (req, res)=>{
 app.post('/updateordelete', (req, res) => {
   console.log(req.body);
   console.log(ids[req.body.num])
+  if(req.body.operationType == "update"){
   db.collection(productTable).update(
     {_id: ids[req.body.num]}, // _id of element to be updated
     {$set: {productName: req.body.productName, quantity: req.body.quantity, vendor: req.body.vendor}}
     , (result) => {
     //  res.redirect('/manageInv');  // update the page
     });
+  }
+  else if(req.body.operationType== "delete"){
+    console.log("deleting something");
+    db.collection(productTable).remove(
+      {_id: ids[req.body.num]}, true, (result) => {
+        updateIds();
+       res.redirect('/manageInv');  // update the page
+      });
+  }
 });
 
 app.post('/addInv', (req, res) => {
@@ -163,7 +173,7 @@ function updateIds(callback) {
   cursor.toArray(function (err, results) {
     if (err)
     return console.log(err);
-
+    ids = [];
     for (var i = 0; i < results.length; i++) {
       ids.push(results[i]._id);
     }
