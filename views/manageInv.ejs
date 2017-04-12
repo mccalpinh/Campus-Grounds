@@ -60,21 +60,28 @@
             border: none;
           }
 
+        select {
+              width: 150px;
+              display: inline-block;
+              padding-top: 3px;
+              padding-bottom: 3px;
+              background: white;
+              color: #474747;
+              border: 1px solid #474747;
+            }
+
 
         .hidden{
           height: 0px;
-          -moz-transition: height 1s ease;
-    -webkit-transition: height 1s ease;
-    -o-transition: height 1s ease;
-    transition: height 1s ease;
         }
 
         .display{
           height: auto;
-          -moz-transition: height 1s ease;
-    -webkit-transition: height 1s ease;
-    -o-transition: height 1s ease;
-    transition: height 1s ease;
+        }
+        #transit{
+          height: auto;
+          -webkit-transition: .2s; /* For Safari 3.1 to 6.0 */
+            transition: 1s;
         }
 
         .b {
@@ -99,7 +106,7 @@
           float: right;
           text-align: right;
           padding: 10px;
-          border: 1px solid #ededed;
+          background-color: #f9f9f9;
         }
 
         .head{
@@ -112,7 +119,6 @@
           text-transform: uppercase;
         }
 
-
       </style>
 </head>
 <body>
@@ -121,17 +127,17 @@
 
   <div class = "addbox">
     <form action="/addInv" method="POST">
-      Add Product:
           <input type="text" placeholder="product name" name="productName">
           <input type="text" placeholder="quantity" name="quantity">
         <!--  <input type="text" placeholder="vendor" name="vendor"> -->
-        Vendor:
+
           <select placeholder="vendor" name="vendor">
+            <option value="" selected>Select Vendor</option>
             <% for(var i=0; i<vendor.length; i++) {%>
             <option value="<%= vendor[i].vendorName %>" > <%= vendor[i].vendorName %> </option>
             <% } %>
           </select>
-          <button type="submit">Submit</button>
+          <button type="submit">Add Product</button>
     </form>
   </div>
 </div>
@@ -145,7 +151,7 @@
        <div id="item<%=i%>"> <!-- one line -->
          <input type = "button" id = <%= "b" + i %> onclick="Expand(<%= i %>)" value="+">
          <input type="display" name="vendorName" value="<%= vendor[i].vendorName %>" readonly>
-
+         <div id = "transit">
          <div id = <%= i %> class="hidden">
          <ul class="Inventory">
            <!-- put a line for labelling columns -->
@@ -174,6 +180,7 @@
             <% } %>
               <% } %>
             </ul>
+          </div>
           </div>
        </div>
        <% } %>
