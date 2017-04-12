@@ -22,7 +22,7 @@
     /*      background: -o-linear-gradient(bottom right, blue, yellow); /* For Opera 11.1 to 12.0 */
       /*    background: -moz-linear-gradient(bottom right, blue, yellow); /* For Firefox 3.6 to 15 */
       /*    background: linear-gradient(#efefef, gray); /* Standard syntax (must be last) */
-          background-color: #ccc;
+          background-color: #fff;
           padding: 60px;
         }
 
@@ -63,41 +63,112 @@
 
         .hidden{
           height: 0px;
+          -moz-transition: height 1s ease;
+    -webkit-transition: height 1s ease;
+    -o-transition: height 1s ease;
+    transition: height 1s ease;
         }
 
         .display{
           height: auto;
+          -moz-transition: height 1s ease;
+    -webkit-transition: height 1s ease;
+    -o-transition: height 1s ease;
+    transition: height 1s ease;
+        }
+
+        .b {
+          border-bottom: 1px solid #59B2E0;
+          margin-top: 10px;
+          margin-bottom: 10px;
+        }
+
+        .bb {
+          border-bottom: 1px solid #ccc;
+          margin-top: 10px;
+          margin-bottom: 10px;
+        }
+
+        .buttonbox{
+          display: inline-block;
+        float: right;
+        }
+
+        .addbox{
+          display: inline-block;
+          float: right;
+          text-align: right;
+          padding: 10px;
+          border: 1px solid #ededed;
+        }
+
+        .head{
+          display: inline-block;
+          font-size: 24pt;
+        }
+
+        .labelcolumns{
+          padding: 5px;
+          text-transform: uppercase;
         }
 
 
       </style>
 </head>
 <body>
-  <h1>Inventory</h1>
+  <div class = "top">
+  <div class = "head">Inventory</div>
+
+  <div class = "addbox">
+    <form action="/addInv" method="POST">
+      Add Product:
+          <input type="text" placeholder="product name" name="productName">
+          <input type="text" placeholder="quantity" name="quantity">
+        <!--  <input type="text" placeholder="vendor" name="vendor"> -->
+        Vendor:
+          <select placeholder="vendor" name="vendor">
+            <% for(var i=0; i<vendor.length; i++) {%>
+            <option value="<%= vendor[i].vendorName %>" > <%= vendor[i].vendorName %> </option>
+            <% } %>
+          </select>
+          <button type="submit">Submit</button>
+    </form>
+  </div>
+</div>
+
+  <p>
 
 <!-- here 'j' is a absolute/unique variable so it refers to the index of the product in the product collection-->
   <div class="Vendors">
      <% for(var i=0; i<vendor.length; i++) {%>
-       <div id="item<%=i%>">
+       <div class = "b"></div>
+       <div id="item<%=i%>"> <!-- one line -->
          <input type = "button" id = <%= "b" + i %> onclick="Expand(<%= i %>)" value="+">
          <input type="display" name="vendorName" value="<%= vendor[i].vendorName %>" readonly>
 
          <div id = <%= i %> class="hidden">
          <ul class="Inventory">
+           <!-- put a line for labelling columns -->
+           <div class = "labelcolumns">
+           <input type="display" value="Item" readonly>
+           <input type="display" value="Quantity" readonly>
+         </div>
             <% for(var j=0; j<inventory.length; j++) {%>
               <% if (inventory[j].vendor == vendor[i].vendorName ) { %>
+                <div class = "bb"></div>
               <li id="item<%=j%>">
                 <form id="<%= 'form'+j %>" action="/updateordelete" method="post">
                   <input type="hidden" name="num" value="<%= j %>">
                   <input type="hidden" name="vendor" value="<%= vendor[i].vendorName %>">
                   <input type="hidden" id="<%= "type" + j %>" value="update" name = "operationType">
                 <input type="display" id="<%= 'productName'+j %>" name="productName" value="<%= inventory[j].productName %>" readonly>
-                Quantity: <input type="display" id="<%= 'quantity'+j %>" name="quantity" value="<%= inventory[j].quantity %>" readonly>
+                <input type="display" id="<%= 'quantity'+j %>" name="quantity" value="<%= inventory[j].quantity %>" readonly>
             <!--    <input type = "button" id = <%= "b" + i + "," + j %> onclick="Expand(<%= i +","+j %>)" value="edit">
                 <input type = "button" id = <%= "b" + i + "," + j %> onclick="Delete(<%= i +","+j %>)" value="delete"> -->
+                <div class = "buttonbox">
                 <button type="button" id= <%= 'edit' + j %> onclick="edit(this)">Edit</button>
                 <button type="button" id= <%= 'delete' + j %> onclick="deleteProduct(this)">Delete</button>
-
+              </div>
               </form>
               </li>
             <% } %>
@@ -106,22 +177,11 @@
           </div>
        </div>
        <% } %>
+       <div class = "b"></div>
      </div>
 
 
 
-  <form action="/addInv" method="POST">
-        <input type="text" placeholder="product name" name="productName">
-        <input type="text" placeholder="quantity" name="quantity">
-      <!--  <input type="text" placeholder="vendor" name="vendor"> -->
-      Vendor:
-        <select placeholder="vendor" name="vendor">
-          <% for(var i=0; i<vendor.length; i++) {%>
-          <option value="<%= vendor[i].vendorName %>" > <%= vendor[i].vendorName %> </option>
-          <% } %>
-        </select>
-        <button type="submit">Submit</button>
-  </form>
 
 
   <nav id= "nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
