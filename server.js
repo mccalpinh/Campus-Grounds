@@ -83,7 +83,7 @@ app.get('/manageVen', (req, res)=>{
  });
 
 
-app.post('/update', (req, res) => {
+app.post('/updateordelete', (req, res) => {
   console.log(req.body);
   console.log(ids[req.body.num])
   db.collection(productTable).update(

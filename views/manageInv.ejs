@@ -90,7 +90,7 @@
                 <form id="<%= 'form'+j %>" action="/updateordelete" method="post">
                   <input type="hidden" name="num" value="<%= j %>">
                   <input type="hidden" name="vendor" value="<%= vendor[i].vendorName %>">
-                  <input type="hidden" name="type" value="update">
+                  <input type="hidden" id="type" value="update">
                 <input type="display" id="<%= 'productName'+j %>" name="productName" value="<%= inventory[j].productName %>" readonly>
                 Quantity: <input type="display" id="<%= 'quantity'+j %>" name="quantity" value="<%= inventory[j].quantity %>" readonly>
             <!--    <input type = "button" id = <%= "b" + i + "," + j %> onclick="Expand(<%= i +","+j %>)" value="edit">
@@ -166,6 +166,8 @@
           // get the number in the button id. It matches the number in the id of the
           // input element we need
           var rownum = button.id.match(/\d+/)[0];  // Extract the number from string 'editNUM'
+          var type = document.getElementById('type'+rownum);
+        //  type.value = "edit";
           var productInput = document.getElementById('productName'+rownum);
           var quantityInput = document.getElementById('quantity'+rownum);
           if (button.innerHTML == "Done") {
@@ -197,7 +199,7 @@
   function deleteProduct(button){
     var rownum = button.id.match(/\d+/)[0];  // Extract the number from string 'editNUM'
     var type = document.getElementById('type'+rownum);
-    //type.value = 'delete';
+    type.value = "delete";
     var form = document.getElementById('form'+rownum);
     form.submit();
     console.log('submitted form');
