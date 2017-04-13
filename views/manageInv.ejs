@@ -60,6 +60,16 @@
             border: none;
           }
 
+          input[type="display-c"] {
+              width: 150px;
+              display: inline-block;
+              text-align: center;
+              padding-left: 10px;
+              padding-right: 10px;
+              background: none;
+              border: none;
+            }
+
         select {
               width: 150px;
               display: inline-block;
@@ -73,15 +83,33 @@
 
         .hidden{
           height: 0px;
+          overflow: hidden;
         }
 
         .display{
           height: auto;
         }
-        #transit{
-          height: auto;
-          -webkit-transition: .2s; /* For Safari 3.1 to 6.0 */
-            transition: 1s;
+
+        .transit{
+          -moz-transition: .7s;
+          -ms-transition: .7s;
+          -o-transition: .7s;
+          -webkit-transition: .7s;
+          transition: .7s;
+          max-height: 0px;
+          overflow: hidden;
+        }
+
+        .v{
+          padding-top:10px;
+          padding-bottom: 10px;
+          margin-top:-10px;
+          margin-bottom: -10px;
+          padding-left: 10px;
+        }
+
+        .v:hover{
+          background-color: #f9f9f9;
         }
 
         .b {
@@ -115,8 +143,9 @@
         }
 
         .labelcolumns{
+          margin-top: 10px;
           padding: 5px;
-          text-transform: uppercase;
+          font-variant: small-caps;
         }
 
       </style>
@@ -148,17 +177,21 @@
   <div class="Vendors">
      <% for(var i=0; i<vendor.length; i++) {%>
        <div class = "b"></div>
-       <div id="item<%=i%>"> <!-- one line -->
+       <div id="item<%=i%>" > <!-- one line -->
+         <div class = "v">
          <input type = "button" id = <%= "b" + i %> onclick="Expand(<%= i %>)" value="+">
-         <input type="display" name="vendorName" value="<%= vendor[i].vendorName %>" readonly>
-         <div id = "transit">
+         <input type="display" name="vendorName" value="<%= vendor[i].vendorName %>" readonly></div>
+    <!--     <button onclick="Testf(<%= i%>)">open</button><button onclick="Testf2(<%= i%>)">close</button><br> -->
+         <div id = <%= "transit" + i %> class = "transit">
+
          <div id = <%= i %> class="hidden">
          <ul class="Inventory">
            <!-- put a line for labelling columns -->
            <div class = "labelcolumns">
-           <input type="display" value="Item" readonly>
-           <input type="display" value="Quantity" readonly>
-         </div>
+             <input type="display" value="item" readonly>
+            <input type="display-c" value="quantity" readonly>
+            <!-- these can stay uncapitalized to make the smallcaps look nice -->
+          </div>
             <% for(var j=0; j<inventory.length; j++) {%>
               <% if (inventory[j].vendor == vendor[i].vendorName ) { %>
                 <div class = "bb"></div>
@@ -168,7 +201,7 @@
                   <input type="hidden" name="vendor" value="<%= vendor[i].vendorName %>">
                   <input type="hidden" id="<%= "type" + j %>" value="update" name = "operationType">
                 <input type="display" id="<%= 'productName'+j %>" name="productName" value="<%= inventory[j].productName %>" readonly>
-                <input type="display" id="<%= 'quantity'+j %>" name="quantity" value="<%= inventory[j].quantity %>" readonly>
+                <input type="display-c" id="<%= 'quantity'+j %>" name="quantity" value="<%= inventory[j].quantity %>" readonly>
             <!--    <input type = "button" id = <%= "b" + i + "," + j %> onclick="Expand(<%= i +","+j %>)" value="edit">
                 <input type = "button" id = <%= "b" + i + "," + j %> onclick="Delete(<%= i +","+j %>)" value="delete"> -->
                 <div class = "buttonbox">
@@ -187,7 +220,9 @@
        <div class = "b"></div>
      </div>
 
-
+<p>
+</p>
+<p></p>
 
 
 
@@ -209,23 +244,41 @@
   function Expand(i){
     var c = 0;
     var index = i;
-    var s = document.getElementById(index);
+    var s = document.getElementById("" + index + "");
     //if(c % 2 == 0){
-      s.className = "display";
-    //}
+     s.className = "display";
+
+     //transition the size of the div
+//     var d = document.getElementById("transit" + i);
+  //   d.style.maxHeight = "1000px";
+
     document.getElementById("b" + i).value = "–";
-    document.getElementById("b" + i).onclick = function() { Close(i); };
+    document.getElementById("b" + i).onclick = function() {transitionClosed(i); Close(i) };
+
+    var d = document.getElementById("transit" + i);
+    d.style.maxHeight = "1000px";
 
   }
 
   function Close(i){
       var index = i;
-      var s = document.getElementById(index);
-      s.className = "hidden";
+    //  var s = document.getElementById(index);
+    //  s.className = "hidden";
+
       document.getElementById("b" + i).value = "+";
-      document.getElementById("b" + i).onclick = function() { Expand(i); };
+      document.getElementById("b" + i).onclick = function() { Expand(i); transitionOpen(i)};
+
     }
 
+function transitionOpen(i){
+  var d = document.getElementById("transit" + i);
+  d.style.maxHeight = "auto";
+}
+
+function transitionClosed(i){
+  var d = document.getElementById("transit" + i);
+  d.style.maxHeight = "0px";
+}
 
   var content = [];
 
