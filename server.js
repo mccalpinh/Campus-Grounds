@@ -41,6 +41,7 @@ app.get('/manageInv', (req, res)=>{
   var c2 = db.collection(vendorTable).find();
   // console.log(cursor);  // This has too much info
   // convert to an array to extract the movie data
+  updateIds();
   cursor.toArray(function (err, results) {
     if (err)
       return console.log(err);
@@ -97,9 +98,14 @@ app.post('/updateordelete', (req, res) => {
   else if(req.body.operationType== "delete"){
     console.log("deleting something");
     db.collection(productTable).remove(
-      {_id: ids[req.body.num]}, true, (result) => {
-        updateIds();
-       res.redirect('/manageInv');  // update the page
+      {_id: ids[req.body.num]}, true, (error, result) => {
+        if (error !== null) {
+          console.log('[ERR] Failed to find item in num ' + req.body.num
+            + ' array of ids are:  ' + JSON.stringify(ids));
+        } else {
+          updateIds();
+          res.redirect('/manageInv');  // update the page
+        }
       });
   }
 });
@@ -111,6 +117,7 @@ app.post('/addInv', (req, res) => {
     if (err)
       return console.log(err);
     console.log('saved to database');
+    updateIds();
     res.redirect('/manageInv');
   });
 });
