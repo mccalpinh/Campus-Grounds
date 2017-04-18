@@ -241,7 +241,10 @@
 </html>
 
 <script>
+
+
   function Expand(i){
+    first = false;
     var c = 0;
     var index = i;
     var s = document.getElementById("" + index + "");
@@ -257,7 +260,10 @@
 
     var d = document.getElementById("transit" + i);
     d.style.maxHeight = "1000px";
-
+    if(d.style.maxHeight == "1000px"){
+  //  console.log(d.scrollHeight);
+    d.style.maxHeight = d.scrollHeight + "px";
+    }
   }
 
   function Close(i){
@@ -266,14 +272,14 @@
     //  s.className = "hidden";
 
       document.getElementById("b" + i).value = "+";
-      document.getElementById("b" + i).onclick = function() { Expand(i); transitionOpen(i)};
+      document.getElementById("b" + i).onclick = function() { Expand(i);};
 
     }
 
-function transitionOpen(i){
-  var d = document.getElementById("transit" + i);
-  d.style.maxHeight = "auto";
-}
+//function transitionOpen(i){
+//  var d = document.getElementById("transit" + i);
+//  d.style.maxHeight = "auto";
+//}
 
 function transitionClosed(i){
   var d = document.getElementById("transit" + i);
