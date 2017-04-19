@@ -59,6 +59,14 @@
             background: none;
             border: none;
           }
+        input[type="display-name"] {
+              width: 200px;
+              display: inline-block;
+              padding-left: 10px;
+              padding-right: 10px;
+              background: none;
+              border: none;
+            }
 
           input[type="display-c"] {
               width: 150px;
@@ -137,15 +145,30 @@
           background-color: #f9f9f9;
         }
 
+        .s {
+          margin-left: 40px;
+        }
+
         .head{
           display: inline-block;
           font-size: 24pt;
         }
 
         .labelcolumns{
-          margin-top: 10px;
-          padding: 5px;
+          margin-top: 15px;
+          margin-left: -40px;
+          margin-bottom: 15px;
+          padding-left: 40px;
           font-variant: small-caps;
+          background-color: #f2f7ff;
+        }
+        .sublabelcolumns{
+          margin-top: 15px;
+          margin-left: 0px;
+          margin-bottom: 15px;
+          padding-left: 40px;
+          font-variant: small-caps;
+          background-color: #f9f9f9;
         }
 
       </style>
@@ -157,6 +180,7 @@
   <div class = "addbox">
     <form action="/addInv" method="POST">
           <input type="text" placeholder="product name" name="productName">
+          <input type="text" placeholder="flavor (if applicable)" name="flavor">
           <input type="text" placeholder="quantity" name="quantity">
         <!--  <input type="text" placeholder="vendor" name="vendor"> -->
 
@@ -172,7 +196,7 @@
 </div>
 
   <p>
-
+<!-- need to set up a boolean? -->
 <!-- here 'j' is a absolute/unique variable so it refers to the index of the product in the product collection-->
   <div class="Vendors">
      <% for(var i=0; i<vendor.length; i++) {%>
@@ -188,30 +212,74 @@
          <ul class="Inventory">
            <!-- put a line for labelling columns -->
            <div class = "labelcolumns">
-             <input type="display" value="item" readonly>
+             <input type="display-name" value="item" readonly>
             <input type="display-c" value="quantity" readonly>
             <!-- these can stay uncapitalized to make the smallcaps look nice -->
           </div>
+          <% var c = 0; %>
+          <% var displayed = new Array(); %>
+          <% for(var j=0; j<inventory.length; j++) {%>
+            <% displayed[j] = false; %>
+          <% } %>
             <% for(var j=0; j<inventory.length; j++) {%>
-              <% if (inventory[j].vendor == vendor[i].vendorName ) { %>
-                <div class = "bb"></div>
-              <li id="item<%=j%>">
-                <form id="<%= 'form'+j %>" action="/updateordelete" method="post">
-                  <input type="hidden" name="num" value="<%= j %>">
-                  <input type="hidden" name="vendor" value="<%= vendor[i].vendorName %>">
-                  <input type="hidden" id="<%= "type" + j %>" value="update" name = "operationType">
-                <input type="display" id="<%= 'productName'+j %>" name="productName" value="<%= inventory[j].productName %>" readonly>
-                <input type="display-c" id="<%= 'quantity'+j %>" name="quantity" value="<%= inventory[j].quantity %>" readonly>
-            <!--    <input type = "button" id = <%= "b" + i + "," + j %> onclick="Expand(<%= i +","+j %>)" value="edit">
-                <input type = "button" id = <%= "b" + i + "," + j %> onclick="Delete(<%= i +","+j %>)" value="delete"> -->
-                <div class = "buttonbox">
-                <button type="button" id= <%= 'edit' + j %> onclick="edit(this)">Edit</button>
-                <button type="button" id= <%= 'delete' + j %> onclick="deleteProduct(this)">Delete</button>
-              </div>
-              </form>
-              </li>
+              <% if (inventory[j].vendor == vendor[i].vendorName && displayed[j]==false ) { %>
+                <% if (c != 0) { %>
+                  <div class = "bb"></div>
+                  <% } %>
+                    <% if ((inventory[j].flavor == null) || (inventory[j].flavor == "")) { %>
+                      <li id="item<%=j%>">
+                        <form id="<%= 'form'+j %>" action="/updateordelete" method="post">
+                            <input type="hidden" name="num" value="<%= j %>">
+                            <input type="hidden" name="vendor" value="<%= vendor[i].vendorName %>">
+                            <input type="hidden" id="<%= "type" + j %>" value="update" name = "operationType">
+                            <input type="display-name" id="<%= 'productName'+j %>" name="productName" value="<%= inventory[j].productName %>" readonly>
+                              <input type="display-c" id="<%= 'quantity'+j %>" name="quantity" value="<%= inventory[j].quantity %>" readonly>
+                              <input type="hidden" id="<%= 'flavor'+j %>" name="flavor" value="<%= inventory[j].flavor %>" readonly>
+                              <div class = "buttonbox">
+                                <button type="button" id= <%= 'edit' + j %> onclick="edit(this)">Edit</button>
+                                <button type="button" id= <%= 'delete' + j %> onclick="deleteProduct(this)">Delete</button>
+                              </div></li>
+                            <% } else { %>
+                              <li id="item<%=j%>">
+                              <input type="display-name" name="productName" value="<%= inventory[j].productName %>" readonly>
+                              <!-- want to loop through and find every flavor and display it -->
+                              <div class = "sublabelcolumns">
+                               <input type="display-name" value="flavor" readonly>
+                               <input type="display-c" value="quantity" readonly>
+                               <!-- these can stay uncapitalized to make the smallcaps look nice -->
+                              </div>
+                              <% var d = 0; %> <!-- this is a variable to help format the dividing lines. checks if we are on first entry so we don't put a line before it -->
+                              <% for(var k=0; k<inventory.length; k++) {%>
+                                <% if (inventory[k].productName == inventory[j].productName ) { %>
+                                  <% if (d!=0) { %> <div class = "bb"></div> <% } %>
+
+                                    <li class = "s">
+                                     <form id="<%= 'form'+k %>" action="/updateordelete" method="post">
+                                      <input type="hidden" id="<%= 'productName'+k %>" name="productName" value="<%= inventory[k].productName %>" readonly>
+                                      <input type="hidden" name="num" value="<%= k %>">
+                                      <input type="hidden" name="vendor" value="<%= vendor[i].vendorName %>">
+                                      <input type="hidden" id="<%= "type" + k %>" value="update" name = "operationType">
+                                      <input type="display" id="<%= 'flavor'+k %>" name="flavor" value="<%= inventory[k].flavor %>" readonly>
+                                    <input type="display-c" id="<%= 'quantity'+k %>" name="quantity" value="<%= inventory[k].quantity %>" readonly>
+                                    <% displayed[k] = true; %>
+                                      <div class = "buttonbox">
+                                        <button type="button" id= <%= 'edit' + k %> onclick="edit(this)">Edit</button>
+                                        <button type="button" id= <%= 'delete' + k %> onclick="deleteProduct(this)">Delete</button>
+                                      </div>
+                                     </form>
+                                    </li>
+
+                                    <% d = 1;%>
+                                <% } %>
+                              <% } %>
+                            <% } %>
+
+                          </form>
+                    </li>
+                    <% c = 1; %>
+                    <%displayed[j] = true; %>
             <% } %>
-              <% } %>
+          <% } %>
             </ul>
           </div>
           </div>
@@ -259,11 +327,8 @@
     document.getElementById("b" + i).onclick = function() {transitionClosed(i); Close(i) };
 
     var d = document.getElementById("transit" + i);
-    d.style.maxHeight = "1000px";
-    if(d.style.maxHeight == "1000px"){
-  //  console.log(d.scrollHeight);
     d.style.maxHeight = d.scrollHeight + "px";
-    }
+
   }
 
   function Close(i){
@@ -296,28 +361,33 @@ function transitionClosed(i){
         //  type.value = "edit";
           var productInput = document.getElementById('productName'+rownum);
           var quantityInput = document.getElementById('quantity'+rownum);
+          var flavorInput = document.getElementById('flavor'+rownum);
           if (button.innerHTML == "Done") {
             productInput.readOnly = true;
             quantityInput.readOnly = true;
+            flavorInput.readOnly = true;
             // if the content was edited then update the database
-            if (content[rownum].product != productInput.value || content[rownum].quantity != quantityInput.value) {
+            if (content[rownum].product != productInput.value || content[rownum].quantity != quantityInput.value || content[rownum].flavor != flavorInput.value) {
               var form = document.getElementById('form'+rownum);
               form.submit();
               console.log('submitted form');
             }
             productInput.style.background = "none";
             quantityInput.style.background = "none";
+            flavorInput.style.background = "none";
             button.innerHTML = "Edit";
           }
           else {
             // get the content of titleInput and ratingInput
-            content[rownum] = {product: productInput.value, quantity: quantityInput.value};
+            content[rownum] = {product: productInput.value, quantity: quantityInput.value, flavor: flavorInput.value};
             console.log(content[rownum]);
             // make this input element editable
             productInput.readOnly = false;
             quantityInput.readOnly = false;
+            flavorInput.readOnly = false;
             productInput.style.backgroundColor = "yellow";
             quantityInput.style.backgroundColor = "yellow";
+            flavorInput.style.backgroundColor = "yellow";
             button.innerHTML = "Done";
           }
 };
