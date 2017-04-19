@@ -19,7 +19,7 @@
       /*      background: -o-linear-gradient(bottom right, blue, yellow); /* For Opera 11.1 to 12.0 */
         /*    background: -moz-linear-gradient(bottom right, blue, yellow); /* For Firefox 3.6 to 15 */
         /*    background: linear-gradient(#efefef, gray); /* Standard syntax (must be last) */
-            background-color: #ccc;
+            background-color: white;
             padding: 60px;
           }
 
@@ -57,6 +57,42 @@
               border: none;
             }
 
+            .v{
+              padding-top:10px;
+              padding-bottom: 10px;
+              margin-top:-10px;
+              margin-bottom: -10px;
+              padding-left: 10px;
+            }
+
+            .v:hover{
+              background-color: #f9f9f9;
+            }
+
+            .b {
+              border-bottom: 1px solid #59B2E0;
+              margin-top: 10px;
+              margin-bottom: 10px;
+            }
+
+            .addbox{
+              display: inline-block;
+              float: right;
+              text-align: right;
+              padding: 10px;
+              background-color: #f9f9f9;
+            }
+            .head{
+              display: inline-block;
+              font-size: 24pt;
+            }
+
+            .dbutton{
+              display: inline-block;
+              float: right;
+              vertical-align: center;
+            }
+
           .hidden{
             height: 0px;
           }
@@ -69,21 +105,27 @@
         </style>
 </head>
 <body>
-  <h1>Vendors</h1>
+
+  <div class="head">Vendors</div>
+  <div class="addbox">
+    <form action="/addVen" method="POST">
+          <input type="text" placeholder="vendor name" name="vendorName">
+          <button type="submit">Submit</button>
+    </form>
+  </div>
 
   <ul class="Vendors">
      <% for(var i=0; i<vendor.length; i++) {%>
+       <div class = "b"></div>
        <li id="item<%=i%>">
+         <form id="<%= 'form'+i %>" action="/deleteVen" method="post">
          <input type="display" name="vendorName" value="<%= vendor[i].vendorName %>" readonly>
-
+         <button type="button" class="dbutton" id=<%'delete' + i %> onclick="deleteVendor(this)">Delete</button>
        </li>
        <% } %>
+       <div class = "b"></div>
+     </form>
      </ul>
-
-  <form action="/addVen" method="POST">
-        <input type="text" placeholder="vendor name" name="vendorName">
-        <button type="submit">Submit</button>
-  </form>
 
   <nav id= "nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
@@ -97,4 +139,19 @@
         <li class="active"><a href="/manageVen">Manage Vendors</a></li>
 
 </body>
+
+
+<script>
+  function deleteVendor(button){
+    var p = confirm("Are you sure?");
+    if (p){
+    var rownum = button.id.match(/\d+/)[0];  // Extract the number from string 'editNUM'
+    var type = document.getElementById('type'+rownum);
+    type.value = "delete";
+    var form = document.getElementById('form'+rownum);
+    form.submit();
+    console.log('submitted form');
+    }
+  }
+</script>
 </html>

@@ -86,7 +86,7 @@ app.get('/manageVen', (req, res)=>{
 
 app.post('/updateordelete', (req, res) => {
   console.log(req.body);
-  console.log(ids[req.body.num])
+  console.log(ids[req.body.num]);
   if(req.body.operationType == "update"){
   db.collection(productTable).update(
     {_id: ids[req.body.num]}, // _id of element to be updated
@@ -132,6 +132,22 @@ app.post('/addVen', (req, res) => {
     res.redirect('/manageVen');
   });
 });
+
+app.post('/deleteVen', (req, res) => {
+  console.log(req.body);
+  console.log(ids[req.body.num]);
+  console.log("deleting something");
+  db.collection(vendorTable).remove(
+    {_id: ids[req.body.num]}, true, (error, result) => {
+      if (error !== null) {
+        console.log('[ERR] Failed to find item in num ' + req.body.num
+          + ' array of ids are:  ' + JSON.stringify(ids));
+      } else {
+        updateIds();
+        res.redirect('/manageVen');  // update the page
+      }
+    });
+}
 
  // Load the module
  var modelTools = require('./models/dataTools.js');
