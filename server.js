@@ -147,7 +147,7 @@ app.post('/deleteVen', (req, res) => {
         res.redirect('/manageVen');  // update the page
       }
     });
-}
+});
 
  // Load the module
  var modelTools = require('./models/dataTools.js');
