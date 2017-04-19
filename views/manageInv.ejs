@@ -78,6 +78,30 @@
               border: none;
             }
 
+            input[type="button"] { /* for the expand/close buttons */
+                border-radius: 3px;
+                background-color: #59B2E0;
+                border: 0px;
+                color: #fff;
+              }
+
+            button[type="button"] { /* for the edit/delete buttons */
+                  border: 1px solid #fff;
+                  border-radius: 3px;
+                  background: #f4f4f4; /* For browsers that do not support gradients */
+                  background: -webkit-linear-gradient(#f2f2f2, #efefef);
+                  background: -o-linear-gradient(#f2f2f2, #efefef);
+                  background: -moz-linear-gradient(#f2f2f2, #efefef);
+                  background: linear-gradient(#f2f2f2, #efefef);
+                  color: #595959;
+                  width: 55px;
+                  height:25px;
+                }
+            button[type="button"]:hover{
+                      border: 1px solid #59B2E0;
+                      border-radius: 3px;
+                    }
+
         select {
               width: 150px;
               display: inline-block;
@@ -135,6 +159,7 @@
         .buttonbox{
           display: inline-block;
           float: right;
+          vertical-align: center;
         }
 
         .addbox{
@@ -251,15 +276,14 @@
                               <% var d = 0; %> <!-- this is a variable to help format the dividing lines. checks if we are on first entry so we don't put a line before it -->
                               <% for(var k=0; k<inventory.length; k++) {%>
                                 <% if (inventory[k].productName == inventory[j].productName ) { %>
-                                  <% if (d!=0) { %> <div class = "bb"></div> <% } %>
-
                                     <li class = "s">
+                                      <% if (d!=0) { %> <div class = "bb"></div> <% } %>
                                      <form id="<%= 'form'+k %>" action="/updateordelete" method="post">
                                       <input type="hidden" id="<%= 'productName'+k %>" name="productName" value="<%= inventory[k].productName %>" readonly>
                                       <input type="hidden" name="num" value="<%= k %>">
                                       <input type="hidden" name="vendor" value="<%= vendor[i].vendorName %>">
                                       <input type="hidden" id="<%= "type" + k %>" value="update" name = "operationType">
-                                      <input type="display" id="<%= 'flavor'+k %>" name="flavor" value="<%= inventory[k].flavor %>" readonly>
+                                      <input type="display-name" id="<%= 'flavor'+k %>" name="flavor" value="<%= inventory[k].flavor %>" readonly>
                                     <input type="display-c" id="<%= 'quantity'+k %>" name="quantity" value="<%= inventory[k].quantity %>" readonly>
                                     <% displayed[k] = true; %>
                                       <div class = "buttonbox">
