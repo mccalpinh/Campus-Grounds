@@ -90,7 +90,7 @@ app.post('/updateordelete', (req, res) => {
   if(req.body.operationType == "update"){
   db.collection(productTable).update(
     {_id: ids[req.body.num]}, // _id of element to be updated
-    {$set: {productName: req.body.productName, quantity: req.body.quantity, flavor: req.body.flavor, vendor: req.body.vendor, purchaseunit: req.body.purchaseunit}}
+    {$set: {productName: req.body.productName, quantity: req.body.quantity, flavor: req.body.flavor, vendor: req.body.vendor, purchaseunit: req.body.purchaseunit, inventoryunit1: req.body.inventoryunit1, inventoryunit2: req.body.inventoryunit2}}
     , (result) => {
     //  res.redirect('/manageInv');  // update the page
     });
