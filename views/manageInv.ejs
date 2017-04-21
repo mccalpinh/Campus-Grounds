@@ -1,13 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-
-
   <meta charset="UTF-8">
   <title>Manage Inventory</title>
-
-
 
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -22,7 +17,7 @@
     /*      background: -o-linear-gradient(bottom right, blue, yellow); /* For Opera 11.1 to 12.0 */
       /*    background: -moz-linear-gradient(bottom right, blue, yellow); /* For Firefox 3.6 to 15 */
       /*    background: linear-gradient(#efefef, gray); /* Standard syntax (must be last) */
-          background-color: #ccc;
+          background-color: #fff;
           padding: 60px;
         }
 
@@ -59,69 +54,321 @@
             background: none;
             border: none;
           }
+        input[type="display-name"] {
+              width: 200px;
+              display: inline-block;
+              padding-left: 10px;
+              padding-right: 10px;
+              background: none;
+              border: none;
+            }
+            input[type="display-f"] {
+                  width: 160px;
+                  display: inline-block;
+                  padding-left: 10px;
+                  padding-right: 10px;
+                  background: none;
+                  border: none;
+                }
+
+          input[type="display-c"] {
+              width: 150px;
+              display: inline-block;
+              text-align: center;
+              padding-left: 10px;
+              padding-right: 10px;
+              background: none;
+              border: none;
+            }
+
+            input[type="button"] { /* for the expand/close buttons */
+                border-radius: 3px;
+                background-color: #59B2E0;
+                border: 0px;
+                color: #fff;
+              }
+
+            button[type="submit"]{
+              border: 1px solid #fff;
+              border-radius: 3px;
+              background: #f4f4f4; /* For browsers that do not support gradients */
+              background: -webkit-linear-gradient(#f2f2f2, #efefef);
+              background: -o-linear-gradient(#f2f2f2, #efefef);
+              background: -moz-linear-gradient(#f2f2f2, #efefef);
+              background: linear-gradient(#b0e0e6, #59B2E0, #b0e0e6);
+              color: black;
+            }
+            button[type="submit"]:hover{
+                      border: 1px solid #59B2E0;
+                      border-radius: 3px;
+            }
+            button[type="button"] { /* for the edit/delete buttons */
+                  border: 1px solid #fff;
+                  border-radius: 3px;
+                  background: #f4f4f4; /* For browsers that do not support gradients */
+                  background: -webkit-linear-gradient(#f2f2f2, #efefef);
+                  background: -o-linear-gradient(#f2f2f2, #efefef);
+                  background: -moz-linear-gradient(#f2f2f2, #efefef);
+                  background: linear-gradient(#f2f2f2, #efefef);
+                  color: #595959;
+                  width: 55px;
+                  height:25px;
+                }
+
+            button[type="buttond"]{
+              border: 1px solid #fff;
+              border-radius: 3px;
+              background: #f4f4f4; /* For browsers that do not support gradients */
+              background: -webkit-linear-gradient(#ff6347, red, #ff6347);
+              background: -o-linear-gradient(#ff6347, red, #ff6347);
+              background: -moz-linear-gradient(#ff6347, red, #ff6347);
+              background: linear-gradient(#ff6347, red, #ff6347);
+              color: white;
+              width: 55px;
+              height:25px;
+            }
+            button[type="button"]:hover{
+                      border: 1px solid #59B2E0;
+                      border-radius: 3px;
+            }
+            button[type="buttond"]:hover{
+                      border: 1px solid #59B2E0;
+                      border-radius: 3px;
+            }
+
+        select {
+              width: 150px;
+              display: inline-block;
+              padding-top: 3px;
+              padding-bottom: 3px;
+              background: white;
+              color: #474747;
+              border: 1px solid #474747;
+            }
 
 
         .hidden{
           height: 0px;
+          overflow: hidden;
         }
 
         .display{
           height: auto;
         }
 
+        .transit{
+          -moz-transition: .7s;
+          -ms-transition: .7s;
+          -o-transition: .7s;
+          -webkit-transition: .7s;
+          transition: .7s;
+          max-height: 0px;
+          overflow: hidden;
+        }
+
+        .v{
+          padding-top:10px;
+          padding-bottom: 10px;
+          margin-top:-10px;
+          margin-bottom: -10px;
+          padding-left: 10px;
+        }
+
+        .v:hover{
+          background-color: #f9f9f9;
+        }
+
+        .b {
+          border-bottom: 1px solid #59B2E0;
+          margin-top: 10px;
+          margin-bottom: 10px;
+        }
+
+        .bb {
+          border-bottom: 1px solid #ccc;
+          margin-top: 10px;
+          margin-bottom: 10px;
+        }
+
+        .buttonbox{
+          display: inline-block;
+          float: right;
+          vertical-align: center;
+        }
+
+        .addbox{
+          display: inline-block;
+          float: right;
+          text-align: right;
+          padding: 10px;
+          background-color: #f9f9f9;
+        }
+
+        .s {
+          margin-left: 40px;
+        }
+
+        .head{
+          display: inline-block;
+          font-size: 24pt;
+        }
+
+        .labelcolumns{
+          margin-top: 15px;
+          margin-left: -40px;
+          margin-bottom: 15px;
+          padding-left: 40px;
+          font-variant: small-caps;
+          background-color: #f2f7ff;
+        }
+        .sublabelcolumns{
+          margin-top: 15px;
+          margin-left: 0px;
+          margin-bottom: 15px;
+          padding-left: 40px;
+          font-variant: small-caps;
+          background-color: #f9f9f9;
+        }
+
+        li{
+          list-style-type: none;
+        }
 
       </style>
 </head>
 <body>
-  <h1>Inventory</h1>
+  <div class = "top">
+  <div class = "head">Inventory</div>
 
+  <div class = "addbox">
+    <form action="/addInv" method="POST">
+          <input type="text" placeholder="product name" name="productName">
+          <input type="text" placeholder="type (if applicable)" name="flavor">
+          <input type="text" placeholder="quantity" name="quantity">
+          <input type="text" placeholder="purchase unit" name="purchaseunit">
+
+        <!--  <input type="text" placeholder="vendor" name="vendor"> -->
+
+          <select placeholder="vendor" name="vendor">
+            <option value="" selected>Select Vendor</option>
+            <% for(var i=0; i<vendor.length; i++) {%>
+            <option value="<%= vendor[i].vendorName %>" > <%= vendor[i].vendorName %> </option>
+            <% } %>
+          </select>
+          <button type="submit">Add Product</button>
+    </form>
+  </div>
+</div>
+
+  <p>
+<!-- need to set up a boolean? -->
 <!-- here 'j' is a absolute/unique variable so it refers to the index of the product in the product collection-->
   <div class="Vendors">
      <% for(var i=0; i<vendor.length; i++) {%>
-       <div id="item<%=i%>">
+       <div class = "b"></div>
+       <div id="item<%=i%>" > <!-- one line -->
+         <div class = "v">
          <input type = "button" id = <%= "b" + i %> onclick="Expand(<%= i %>)" value="+">
-         <input type="display" name="vendorName" value="<%= vendor[i].vendorName %>" readonly>
+         <input type="display" name="vendorName" value="<%= vendor[i].vendorName %>" readonly></div>
+    <!--     <button onclick="Testf(<%= i%>)">open</button><button onclick="Testf2(<%= i%>)">close</button><br> -->
+         <div id = <%= "transit" + i %> class = "transit">
 
          <div id = <%= i %> class="hidden">
          <ul class="Inventory">
+           <!-- put a line for labelling columns -->
+           <div class = "labelcolumns">
+             <input type="display-name" value="item" readonly>
+            <input type="display-c" value="quantity" readonly>
+            <input type="display-c" value="beginning inventory" readonly>
+            <input type="display-c" value="purchase unit" readonly>
+            <input type="display-c" value="inventory unit 1" readonly>
+            <input type="display-c" value="inventory unit 2" readonly>
+            <!-- these can stay uncapitalized to make the smallcaps look nice -->
+            <!-- !!! Call flavor Type for generality -->
+          </div>
+          <% var c = 0; %>
+          <% var displayed = new Array(); %>
+          <% for(var j=0; j<inventory.length; j++) {%>
+            <% displayed[j] = false; %>
+          <% } %>
             <% for(var j=0; j<inventory.length; j++) {%>
-              <% if (inventory[j].vendor == vendor[i].vendorName ) { %>
-              <li id="item<%=j%>">
-                <form id="<%= 'form'+j %>" action="/updateordelete" method="post">
-                  <input type="hidden" name="num" value="<%= j %>">
-                  <input type="hidden" name="vendor" value="<%= vendor[i].vendorName %>">
-                  <input type="hidden" name="type" value="update">
-                <input type="display" id="<%= 'productName'+j %>" name="productName" value="<%= inventory[j].productName %>" readonly>
-                Quantity: <input type="display" id="<%= 'quantity'+j %>" name="quantity" value="<%= inventory[j].quantity %>" readonly>
-            <!--    <input type = "button" id = <%= "b" + i + "," + j %> onclick="Expand(<%= i +","+j %>)" value="edit">
-                <input type = "button" id = <%= "b" + i + "," + j %> onclick="Delete(<%= i +","+j %>)" value="delete"> -->
-                <button type="button" id= <%= 'edit' + j %> onclick="edit(this)">Edit</button>
-                <button type="button" id= <%= 'delete' + j %> onclick="deleteProduct(this)">Delete</button>
+              <% if (inventory[j].vendor == vendor[i].vendorName && displayed[j]==false ) { %>
+                <% if (c != 0) { %>
+                  <div class = "bb"></div>
+                  <% } %>
+                    <% if ((inventory[j].flavor == null) || (inventory[j].flavor == "")) { %>
+                      <li id="item<%=j%>">
+                        <form id="<%= 'form'+j %>" action="/updateordelete" method="post">
+                            <input type="hidden" name="num" value="<%= j %>">
+                            <input type="hidden" name="vendor" value="<%= vendor[i].vendorName %>">
+                            <input type="hidden" id="<%= "type" + j %>" value="update" name = "operationType">
+                            <input type="display-name" id="<%= 'productName'+j %>" name="productName" value="<%= inventory[j].productName %>" readonly>
+                              <input type="display-c" id="<%= 'quantity'+j %>" name="quantity" value="<%= inventory[j].quantity %>" readonly>
+                              <input type="display-c" id="<%= 'beginninginventory'+j %>" name="beginninginventory" value="<%= inventory[j].beginninginventory %>" readonly>
+                              <input type="display-c" id="<%= 'purchaseunit'+j %>" name="purchaseunit" value="<%= inventory[j].purchaseunit %>" readonly>
+                              <input type="display-c" id="<%= 'inventoryunit1'+j %>" name="inventoryunit1" value="<%= inventory[j].inventoryunit1 %>" readonly>
+                              <input type="display-c" id="<%= 'inventoryunit2'+j %>" name="inventoryunit2" value="<%= inventory[j].inventoryunit2 %>" readonly>
+                              <input type="hidden" id="<%= 'flavor'+j %>" name="flavor" value="<%= inventory[j].flavor %>" readonly>
+                              <div class = "buttonbox">
+                                <button type="button" id= <%= 'edit' + j %> onclick="edit(this)">Edit</button>
+                                <button type="buttond" id= <%= 'delete' + j %> onclick="deleteProduct(this)">Delete</button>
+                              </div></li>
+                            <% } else { %>
+                              <li id="item<%=j%>">
+                              <input type="display-name" name="productName" value="<%= inventory[j].productName %>" readonly>
+                              <!-- want to loop through and find every flavor and display it -->
+                              <div class = "sublabelcolumns">
+                               <input type="display-f" value="type" readonly>
+                               <!-- <input type="display-c" value="quantity" readonly>  -->
+                               <!-- these can stay uncapitalized to make the smallcaps look nice -->
+                              </div>
+                              <% var d = 0; %> <!-- this is a variable to help format the dividing lines. checks if we are on first entry so we don't put a line before it -->
+                              <% for(var k=0; k<inventory.length; k++) {%>
+                                <% if (inventory[k].productName == inventory[j].productName ) { %>
+                                    <li class = "s">
+                                      <% if (d!=0) { %> <div class = "bb"></div> <% } %>
+                                     <form id="<%= 'form'+k %>" action="/updateordelete" method="post">
+                                      <input type="hidden" id="<%= 'productName'+k %>" name="productName" value="<%= inventory[k].productName %>" readonly>
+                                      <input type="hidden" name="num" value="<%= k %>">
+                                      <input type="hidden" name="vendor" value="<%= vendor[i].vendorName %>">
+                                      <input type="hidden" id="<%= "type" + k %>" value="update" name = "operationType">
+                                      <input type="display-f" id="<%= 'flavor'+k %>" name="flavor" value="<%= inventory[k].flavor %>" readonly>
+                                    <input type="display-c" id="<%= 'quantity'+k %>" name="quantity" value="<%= inventory[k].quantity %>" readonly>
+                                    <input type="display-c" id="<%= 'beginninginventory'+k %>" name="beginninginventory" value="<%= inventory[k].beginninginventory %>" readonly>
+                                    <input type="display-c" id="<%= 'purchaseunit'+k %>" name="purchaseunit" value="<%= inventory[k].purchaseunit %>" readonly>
+                                    <input type="display-c" id="<%= 'inventoryunit1'+k %>" name="inventoryunit1" value="<%= inventory[k].inventoryunit1 %>" readonly>
+                                    <input type="display-c" id="<%= 'inventoryunit2'+k %>" name="inventoryunit2" value="<%= inventory[k].inventoryunit2 %>" readonly>
+                                    <% displayed[k] = true; %>
+                                      <div class = "buttonbox">
+                                        <button type="button" id= <%= 'edit' + k %> onclick="edit(this)">Edit</button>
+                                        <button type="buttond" id= <%= 'delete' + k %> onclick="deleteProduct(this)">Delete</button>
+                                      </div>
+                                     </form>
+                                    </li>
 
-              </form>
-              </li>
+                                    <% d = 1;%>
+                                <% } %>
+                              <% } %>
+                            <% } %>
+
+                          </form>
+                    </li>
+                    <% c = 1; %>
+                    <%displayed[j] = true; %>
             <% } %>
-              <% } %>
+          <% } %>
             </ul>
+          </div>
           </div>
        </div>
        <% } %>
+       <div class = "b"></div>
      </div>
 
+<p>
+</p>
+<p></p>
 
-
-  <form action="/addInv" method="POST">
-        <input type="text" placeholder="product name" name="productName">
-        <input type="text" placeholder="quantity" name="quantity">
-      <!--  <input type="text" placeholder="vendor" name="vendor"> -->
-      Vendor:
-        <select placeholder="vendor" name="vendor">
-          <% for(var i=0; i<vendor.length; i++) {%>
-          <option value="<%= vendor[i].vendorName %>" > <%= vendor[i].vendorName %> </option>
-          <% } %>
-        </select>
-        <button type="submit">Submit</button>
-  </form>
 
 
   <nav id= "nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -139,26 +386,47 @@
 </html>
 
 <script>
+
+
   function Expand(i){
+    first = false;
     var c = 0;
     var index = i;
-    var s = document.getElementById(index);
+    var s = document.getElementById("" + index + "");
     //if(c % 2 == 0){
-      s.className = "display";
-    //}
+     s.className = "display";
+
+     //transition the size of the div
+//     var d = document.getElementById("transit" + i);
+  //   d.style.maxHeight = "1000px";
+
     document.getElementById("b" + i).value = "–";
-    document.getElementById("b" + i).onclick = function() { Close(i); };
+    document.getElementById("b" + i).onclick = function() {transitionClosed(i); Close(i) };
+
+    var d = document.getElementById("transit" + i);
+    d.style.maxHeight = d.scrollHeight + "px";
 
   }
 
   function Close(i){
       var index = i;
-      var s = document.getElementById(index);
-      s.className = "hidden";
+    //  var s = document.getElementById(index);
+    //  s.className = "hidden";
+
       document.getElementById("b" + i).value = "+";
-      document.getElementById("b" + i).onclick = function() { Expand(i); };
+      document.getElementById("b" + i).onclick = function() { Expand(i);};
+
     }
 
+//function transitionOpen(i){
+//  var d = document.getElementById("transit" + i);
+//  d.style.maxHeight = "auto";
+//}
+
+function transitionClosed(i){
+  var d = document.getElementById("transit" + i);
+  d.style.maxHeight = "0px";
+}
 
   var content = [];
 
@@ -166,41 +434,71 @@
           // get the number in the button id. It matches the number in the id of the
           // input element we need
           var rownum = button.id.match(/\d+/)[0];  // Extract the number from string 'editNUM'
+          var type = document.getElementById('type'+rownum);
+        //  type.value = "edit";
           var productInput = document.getElementById('productName'+rownum);
           var quantityInput = document.getElementById('quantity'+rownum);
+          var flavorInput = document.getElementById('flavor'+rownum);
+          var beginninginventoryInput = document.getElementById('beginninginventory'+rownum);
+          var purchaseunitInput = document.getElementById('purchaseunit'+rownum);
+          var inventoryunit1Input = document.getElementById('inventoryunit1'+rownum);
+          var inventoryunit2Input = document.getElementById('inventoryunit2'+rownum);
           if (button.innerHTML == "Done") {
             productInput.readOnly = true;
             quantityInput.readOnly = true;
+            flavorInput.readOnly = true;
+            beginninginventoryInput.readOnly = true
+            purchaseunitInput.readOnly = true;
+            inventoryunit1Input.readOnly = true;
+            inventoryunit2Input.readOnly = true;
             // if the content was edited then update the database
-            if (content[rownum].product != productInput.value || content[rownum].quantity != quantityInput.value) {
+            if (content[rownum].product != productInput.value || content[rownum].quantity != quantityInput.value || content[rownum].flavor != flavorInput.value || content[rownum].beginninginventory != beginninginventoryInput.value || content[rownum].purchaseunit != purchaseunitInput.value || content[rownum].inventoryunit1 != inventoryunit1Input.value || content[rownum].inventoryunit2 != inventoryunit2Input.value) {
               var form = document.getElementById('form'+rownum);
               form.submit();
               console.log('submitted form');
             }
             productInput.style.background = "none";
             quantityInput.style.background = "none";
+            flavorInput.style.background = "none";
+            beginninginventoryInput.style.background = "none"
+            purchaseunitInput.style.background = "none";
+            inventoryunit1Input.style.background = "none";
+            inventoryunit2Input.style.background = "none";
             button.innerHTML = "Edit";
           }
           else {
             // get the content of titleInput and ratingInput
-            content[rownum] = {product: productInput.value, quantity: quantityInput.value};
+            content[rownum] = {product: productInput.value, quantity: quantityInput.value, flavor: flavorInput.value};
             console.log(content[rownum]);
             // make this input element editable
             productInput.readOnly = false;
             quantityInput.readOnly = false;
+            flavorInput.readOnly = false;
+            beginninginventoryInput.readOnly = false;
+            purchaseunitInput.readOnly = false;
+            inventoryunit1Input.readOnly = false;
+            inventoryunit2Input.readOnly = false;
             productInput.style.backgroundColor = "yellow";
             quantityInput.style.backgroundColor = "yellow";
+            flavorInput.style.backgroundColor = "yellow";
+            beginninginventoryInput.style.backgroundColor = "yellow";
+            purchaseunitInput.style.backgroundColor = "yellow";
+            inventoryunit1Input.style.backgroundColor = "yellow";
+            inventoryunit2Input.style.backgroundColor = "yellow";
             button.innerHTML = "Done";
           }
 };
 
   function deleteProduct(button){
+    var p = confirm("Are you sure?");
+    if (p){
     var rownum = button.id.match(/\d+/)[0];  // Extract the number from string 'editNUM'
     var type = document.getElementById('type'+rownum);
-    //type.value = 'delete';
+    type.value = "delete";
     var form = document.getElementById('form'+rownum);
     form.submit();
     console.log('submitted form');
+  }
   }
 
 </script>

@@ -19,13 +19,17 @@
       /*      background: -o-linear-gradient(bottom right, blue, yellow); /* For Opera 11.1 to 12.0 */
         /*    background: -moz-linear-gradient(bottom right, blue, yellow); /* For Firefox 3.6 to 15 */
         /*    background: linear-gradient(#efefef, gray); /* Standard syntax (must be last) */
-            background-color: #ccc;
+            background-color: white;
             padding: 60px;
           }
 
           #nav {
             background-color: #59B2E0;
             color: black;
+          }
+
+          .head{
+            padding-left: 40px;
           }
           .nav.navbar-nav li a {
             color: black;
@@ -57,6 +61,70 @@
               border: none;
             }
 
+            button[type="submit"]{
+              border: 1px solid white;
+              border-radius: 3px;
+              background: #f2f2f2; /* For browsers that do not support gradients */
+              background: -webkit-linear-gradient(#f2f2f2, #efefef);
+              background: -o-linear-gradient(#f2f2f2, #efefef);
+              background: -moz-linear-gradient(#f2f2f2, #efefef);
+              background: linear-gradient(#b0e0e6, #59B2E0, #b0e0e6);
+              color: black;
+              height:40px;
+            }
+            button[type="submit"]:hover{
+                      border: 1px solid #59B2E0;
+                      border-radius: 3px;
+            }
+
+            button[type="button"] { /* for the delete button */
+                  border: 1px solid #fff;
+                  border-radius: 3px;
+                  background: #f4f4f4; /* For browsers that do not support gradients */
+                  background: -webkit-linear-gradient(#ff6347, red, #ff6347);
+                  background: -o-linear-gradient(#ff6347, red, #ff6347);
+                  background: -moz-linear-gradient(#ff6347, red, #ff6347);
+                  background: linear-gradient(#ff6347, red, #ff6347);
+                  color: white;
+                  width: 55px;
+                  height:25px;
+                  float: right;
+                }
+            button[type="button"]:hover{
+                      border: 1px solid #59B2E0;
+                      border-radius: 3px;
+            }
+
+            .transit{
+              -moz-transition: .7s;
+              -ms-transition: .7s;
+              -o-transition: .7s;
+              -webkit-transition: .7s;
+              transition: .7s;
+              max-height: 0px;
+              overflow: hidden;
+            }
+
+
+            .b {
+              border-bottom: 1px solid #59B2E0;
+              margin-top: 10px;
+              margin-bottom: 10px;
+            }
+
+            .addbox{
+              display: inline-block;
+              float: right;
+              text-align: right;
+              padding-top: 10px;
+              padding-right: 10px;
+              background-color: white;
+            }
+            .head{
+              display: inline-block;
+              font-size: 24pt;
+            }
+
           .hidden{
             height: 0px;
           }
@@ -69,21 +137,28 @@
         </style>
 </head>
 <body>
-  <h1>Vendors</h1>
+
+  <div class="head">Vendors</div>
+  <div class="addbox">
+    <form action="/addVen" method="POST">
+          <input type="text" placeholder="vendor name" name="vendorName">
+          <button type="submit">Add Vendor</button>
+    </form>
+  </div>
 
   <ul class="Vendors">
      <% for(var i=0; i<vendor.length; i++) {%>
+       <div class = "b"></div>
        <li id="item<%=i%>">
+         <form id="<%= 'form'+i %>" action="/deleteVen" method="post">
          <input type="display" name="vendorName" value="<%= vendor[i].vendorName %>" readonly>
-
+         <button type="button" class="dbutton" id=<%='delete' + i %> onclick="deleteVendor(this)">Delete</button>
+         <input type="hidden" id="<%= "type" + i %>" value="delete" name = "operationType">
        </li>
+       </form>
        <% } %>
+       <div class = "b"></div>
      </ul>
-
-  <form action="/addVen" method="POST">
-        <input type="text" placeholder="vendor name" name="vendorName">
-        <button type="submit">Submit</button>
-  </form>
 
   <nav id= "nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
@@ -97,4 +172,22 @@
         <li class="active"><a href="/manageVen">Manage Vendors</a></li>
 
 </body>
+
+
+<script>
+  function deleteVendor(button){
+    console.log("clicked");
+    var p = confirm("Are you sure?");
+    if (p){
+    var rownum = button.id.match(/\d+/)[0];  // Extract the number from string 'editNUM'
+    console.log(rownum);
+    var type = document.getElementById('type'+rownum);
+    type.value = "delete";
+    var form = document.getElementById('form'+rownum);
+    console.log('form'+rownum);
+    form.submit();
+    console.log('submitted form');
+    }
+  }
+</script>
 </html>

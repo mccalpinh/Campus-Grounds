@@ -41,6 +41,7 @@ app.get('/manageInv', (req, res)=>{
   var c2 = db.collection(vendorTable).find();
   // console.log(cursor);  // This has too much info
   // convert to an array to extract the movie data
+  updateIds();
   cursor.toArray(function (err, results) {
     if (err)
       return console.log(err);
@@ -83,15 +84,30 @@ app.get('/manageVen', (req, res)=>{
  });
 
 
-app.post('/update', (req, res) => {
+app.post('/updateordelete', (req, res) => {
   console.log(req.body);
-  console.log(ids[req.body.num])
+  console.log(ids[req.body.num]);
+  if(req.body.operationType == "update"){
   db.collection(productTable).update(
     {_id: ids[req.body.num]}, // _id of element to be updated
-    {$set: {productName: req.body.productName, quantity: req.body.quantity, vendor: req.body.vendor}}
+    {$set: {productName: req.body.productName, quantity: req.body.quantity, flavor: req.body.flavor, vendor: req.body.vendor, purchaseunit: req.body.purchaseunit, inventoryunit1: req.body.inventoryunit1, inventoryunit2: req.body.inventoryunit2}}
     , (result) => {
     //  res.redirect('/manageInv');  // update the page
     });
+  }
+  else if(req.body.operationType== "delete"){
+    console.log("deleting something");
+    db.collection(productTable).remove(
+      {_id: ids[req.body.num]}, true, (error, result) => {
+        if (error !== null) {
+          console.log('[ERR] Failed to find item in num ' + req.body.num
+            + ' array of ids are:  ' + JSON.stringify(ids));
+        } else {
+          updateIds();
+          res.redirect('/manageInv');  // update the page
+        }
+      });
+  }
 });
 
 app.post('/addInv', (req, res) => {
@@ -101,6 +117,7 @@ app.post('/addInv', (req, res) => {
     if (err)
       return console.log(err);
     console.log('saved to database');
+    updateIds();
     res.redirect('/manageInv');
   });
 });
@@ -114,6 +131,22 @@ app.post('/addVen', (req, res) => {
     console.log('saved to database');
     res.redirect('/manageVen');
   });
+});
+
+app.post('/deleteVen', (req, res) => {
+  console.log(req.body);
+  console.log(ids[req.body.num]);
+  console.log("deleting something");
+  db.collection(vendorTable).remove(
+    {_id: ids[req.body.num]}, true, (error, result) => {
+      if (error !== null) {
+        console.log('[ERR] Failed to find item in num ' + req.body.num
+          + ' array of ids are:  ' + JSON.stringify(ids));
+      } else {
+        updateIdsVen();
+        res.redirect('/manageVen');  // update the page
+      }
+    });
 });
 
  // Load the module
@@ -142,7 +175,7 @@ app.post('/addVen', (req, res) => {
   var ids = new Array();
 
   var port = process.env.PORT || 3000; // || = or
-  MongoClient.connect('mongodb://cguser:coffee1834@ds113680.mlab.com:13680/campusgrounds',
+MongoClient.connect('mongodb://cguser:coffee1834@ds113680.mlab.com:13680/campusgrounds',
 (err, database) => {
   if (err)
   return console.log(err);
@@ -163,7 +196,21 @@ function updateIds(callback) {
   cursor.toArray(function (err, results) {
     if (err)
     return console.log(err);
+    ids = [];
+    for (var i = 0; i < results.length; i++) {
+      ids.push(results[i]._id);
+    }
+    if (typeof callback != 'undefined')
+      callback(ids);
+  });
+}
 
+function updateIdsVen(callback) {
+  var cursor = db.collection(vendorTable).find();
+  cursor.toArray(function (err, results) {
+    if (err)
+    return console.log(err);
+    ids = [];
     for (var i = 0; i < results.length; i++) {
       ids.push(results[i]._id);
     }
