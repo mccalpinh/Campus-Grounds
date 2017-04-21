@@ -143,7 +143,7 @@ app.post('/deleteVen', (req, res) => {
         console.log('[ERR] Failed to find item in num ' + req.body.num
           + ' array of ids are:  ' + JSON.stringify(ids));
       } else {
-        updateIds();
+        updateIdsVen();
         res.redirect('/manageVen');  // update the page
       }
     });
@@ -175,7 +175,7 @@ app.post('/deleteVen', (req, res) => {
   var ids = new Array();
 
   var port = process.env.PORT || 3000; // || = or
-  MongoClient.connect('mongodb://cguser:coffee1834@ds113680.mlab.com:13680/campusgrounds',
+MongoClient.connect('mongodb://cguser:coffee1834@ds113680.mlab.com:13680/campusgrounds',
 (err, database) => {
   if (err)
   return console.log(err);
@@ -193,6 +193,20 @@ app.post('/deleteVen', (req, res) => {
 
 function updateIds(callback) {
   var cursor = db.collection(productTable).find();
+  cursor.toArray(function (err, results) {
+    if (err)
+    return console.log(err);
+    ids = [];
+    for (var i = 0; i < results.length; i++) {
+      ids.push(results[i]._id);
+    }
+    if (typeof callback != 'undefined')
+      callback(ids);
+  });
+}
+
+function updateIdsVen(callback) {
+  var cursor = db.collection(vendorTable).find();
   cursor.toArray(function (err, results) {
     if (err)
     return console.log(err);

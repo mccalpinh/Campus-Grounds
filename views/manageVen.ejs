@@ -27,6 +27,10 @@
             background-color: #59B2E0;
             color: black;
           }
+
+          .head{
+            padding-left: 40px;
+          }
           .nav.navbar-nav li a {
             color: black;
             font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
@@ -57,17 +61,50 @@
               border: none;
             }
 
-            .v{
-              padding-top:10px;
-              padding-bottom: 10px;
-              margin-top:-10px;
-              margin-bottom: -10px;
-              padding-left: 10px;
+            button[type="submit"]{
+              border: 1px solid white;
+              border-radius: 3px;
+              background: #f2f2f2; /* For browsers that do not support gradients */
+              background: -webkit-linear-gradient(#f2f2f2, #efefef);
+              background: -o-linear-gradient(#f2f2f2, #efefef);
+              background: -moz-linear-gradient(#f2f2f2, #efefef);
+              background: linear-gradient(#b0e0e6, #59B2E0, #b0e0e6);
+              color: black;
+              height:40px;
+            }
+            button[type="submit"]:hover{
+                      border: 1px solid #59B2E0;
+                      border-radius: 3px;
             }
 
-            .v:hover{
-              background-color: #f9f9f9;
+            button[type="button"] { /* for the delete button */
+                  border: 1px solid #fff;
+                  border-radius: 3px;
+                  background: #f4f4f4; /* For browsers that do not support gradients */
+                  background: -webkit-linear-gradient(#ff6347, red, #ff6347);
+                  background: -o-linear-gradient(#ff6347, red, #ff6347);
+                  background: -moz-linear-gradient(#ff6347, red, #ff6347);
+                  background: linear-gradient(#ff6347, red, #ff6347);
+                  color: white;
+                  width: 55px;
+                  height:25px;
+                  float: right;
+                }
+            button[type="button"]:hover{
+                      border: 1px solid #59B2E0;
+                      border-radius: 3px;
             }
+
+            .transit{
+              -moz-transition: .7s;
+              -ms-transition: .7s;
+              -o-transition: .7s;
+              -webkit-transition: .7s;
+              transition: .7s;
+              max-height: 0px;
+              overflow: hidden;
+            }
+
 
             .b {
               border-bottom: 1px solid #59B2E0;
@@ -79,18 +116,13 @@
               display: inline-block;
               float: right;
               text-align: right;
-              padding: 10px;
-              background-color: #f9f9f9;
+              padding-top: 10px;
+              padding-right: 10px;
+              background-color: white;
             }
             .head{
               display: inline-block;
               font-size: 24pt;
-            }
-
-            .dbutton{
-              display: inline-block;
-              float: right;
-              vertical-align: center;
             }
 
           .hidden{
@@ -110,7 +142,7 @@
   <div class="addbox">
     <form action="/addVen" method="POST">
           <input type="text" placeholder="vendor name" name="vendorName">
-          <button type="submit">Submit</button>
+          <button type="submit">Add Vendor</button>
     </form>
   </div>
 

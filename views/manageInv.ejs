@@ -88,6 +88,20 @@
                 color: #fff;
               }
 
+            button[type="submit"]{
+              border: 1px solid #fff;
+              border-radius: 3px;
+              background: #f4f4f4; /* For browsers that do not support gradients */
+              background: -webkit-linear-gradient(#f2f2f2, #efefef);
+              background: -o-linear-gradient(#f2f2f2, #efefef);
+              background: -moz-linear-gradient(#f2f2f2, #efefef);
+              background: linear-gradient(#b0e0e6, #59B2E0, #b0e0e6);
+              color: black;
+            }
+            button[type="submit"]:hover{
+                      border: 1px solid #59B2E0;
+                      border-radius: 3px;
+            }
             button[type="button"] { /* for the edit/delete buttons */
                   border: 1px solid #fff;
                   border-radius: 3px;
@@ -100,10 +114,27 @@
                   width: 55px;
                   height:25px;
                 }
+
+            button[type="buttond"]{
+              border: 1px solid #fff;
+              border-radius: 3px;
+              background: #f4f4f4; /* For browsers that do not support gradients */
+              background: -webkit-linear-gradient(#ff6347, red, #ff6347);
+              background: -o-linear-gradient(#ff6347, red, #ff6347);
+              background: -moz-linear-gradient(#ff6347, red, #ff6347);
+              background: linear-gradient(#ff6347, red, #ff6347);
+              color: white;
+              width: 55px;
+              height:25px;
+            }
             button[type="button"]:hover{
                       border: 1px solid #59B2E0;
                       border-radius: 3px;
-                    }
+            }
+            button[type="buttond"]:hover{
+                      border: 1px solid #59B2E0;
+                      border-radius: 3px;
+            }
 
         select {
               width: 150px;
@@ -269,7 +300,7 @@
                               <input type="hidden" id="<%= 'flavor'+j %>" name="flavor" value="<%= inventory[j].flavor %>" readonly>
                               <div class = "buttonbox">
                                 <button type="button" id= <%= 'edit' + j %> onclick="edit(this)">Edit</button>
-                                <button type="button" id= <%= 'delete' + j %> onclick="deleteProduct(this)">Delete</button>
+                                <button type="buttond" id= <%= 'delete' + j %> onclick="deleteProduct(this)">Delete</button>
                               </div></li>
                             <% } else { %>
                               <li id="item<%=j%>">
@@ -296,7 +327,7 @@
                                     <% displayed[k] = true; %>
                                       <div class = "buttonbox">
                                         <button type="button" id= <%= 'edit' + k %> onclick="edit(this)">Edit</button>
-                                        <button type="button" id= <%= 'delete' + k %> onclick="deleteProduct(this)">Delete</button>
+                                        <button type="buttond" id= <%= 'delete' + k %> onclick="deleteProduct(this)">Delete</button>
                                       </div>
                                      </form>
                                     </li>
