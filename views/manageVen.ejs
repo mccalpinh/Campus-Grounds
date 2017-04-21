@@ -120,11 +120,12 @@
        <li id="item<%=i%>">
          <form id="<%= 'form'+i %>" action="/deleteVen" method="post">
          <input type="display" name="vendorName" value="<%= vendor[i].vendorName %>" readonly>
-         <button type="button" class="dbutton" id=<%'delete' + i %> onclick="deleteVendor(this)">Delete</button>
+         <button type="button" class="dbutton" id=<%='delete' + i %> onclick="deleteVendor(this)">Delete</button>
+         <input type="hidden" id="<%= "type" + i %>" value="delete" name = "operationType">
        </li>
+       </form>
        <% } %>
        <div class = "b"></div>
-     </form>
      </ul>
 
   <nav id= "nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -143,12 +144,15 @@
 
 <script>
   function deleteVendor(button){
+    console.log("clicked");
     var p = confirm("Are you sure?");
     if (p){
     var rownum = button.id.match(/\d+/)[0];  // Extract the number from string 'editNUM'
+    console.log(rownum);
     var type = document.getElementById('type'+rownum);
     type.value = "delete";
     var form = document.getElementById('form'+rownum);
+    console.log('form'+rownum);
     form.submit();
     console.log('submitted form');
     }
