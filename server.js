@@ -153,6 +153,7 @@ app.post('/addVen', (req, res) => {
   });
 });
 
+//<<<<<<< HEAD
 //app.post('/deleteVen', (req, res) => {
 //  console.log(req.body);
 //  console.log(ids[req.body.num]);
@@ -168,6 +169,22 @@ app.post('/addVen', (req, res) => {
     //  }
   //  });
 //});
+//=======
+app.post('/deleteVen', (req, res) => {
+  console.log(req.body);
+  console.log(ids[req.body.num]);
+  console.log("deleting something");
+  db.collection(vendorTable).remove(
+    {_id: ids[req.body.num]}, true, (error, result) => {
+      if (error !== null) {
+        console.log('[ERR] Failed to find item in num ' + req.body.num
+          + ' array of ids are:  ' + JSON.stringify(ids));
+      } else {
+        updateIdsVen();
+        res.redirect('/manageVen');  // update the page
+      }
+    });
+});
 
  // Load the module
  var modelTools = require('./models/dataTools.js');
@@ -196,7 +213,7 @@ app.post('/addVen', (req, res) => {
   var venids = new Array();
 
   var port = process.env.PORT || 3000; // || = or
-  MongoClient.connect('mongodb://cguser:coffee1834@ds113680.mlab.com:13680/campusgrounds',
+MongoClient.connect('mongodb://cguser:coffee1834@ds113680.mlab.com:13680/campusgrounds',
 (err, database) => {
   if (err)
   return console.log(err);
@@ -230,7 +247,9 @@ function updateIds(callback) {
   });
 }
 
+
 function updatevenIds(callback) {
+
   var cursor = db.collection(vendorTable).find();
   cursor.toArray(function (err, results) {
     if (err)
@@ -241,5 +260,11 @@ function updatevenIds(callback) {
     }
     if (typeof callback != 'undefined')
       callback(venids);
+    ids = [];
+    for (var i = 0; i < results.length; i++) {
+      ids.push(results[i]._id);
+    }
+    if (typeof callback != 'undefined')
+      callback(ids);
   });
 }
