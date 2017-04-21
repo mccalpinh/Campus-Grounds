@@ -246,6 +246,7 @@
           <input type="text" placeholder="type (if applicable)" name="flavor">
           <input type="text" placeholder="quantity" name="quantity">
           <input type="text" placeholder="purchase unit" name="purchaseunit">
+
         <!--  <input type="text" placeholder="vendor" name="vendor"> -->
 
           <select placeholder="vendor" name="vendor">
@@ -278,7 +279,10 @@
            <div class = "labelcolumns">
              <input type="display-name" value="item" readonly>
             <input type="display-c" value="quantity" readonly>
+            <input type="display-c" value="beginning inventory" readonly>
             <input type="display-c" value="purchase unit" readonly>
+            <input type="display-c" value="inventory unit 1" readonly>
+            <input type="display-c" value="inventory unit 2" readonly>
             <!-- these can stay uncapitalized to make the smallcaps look nice -->
             <!-- !!! Call flavor Type for generality -->
           </div>
@@ -300,7 +304,10 @@
                             <input type="hidden" id="<%= "type" + j %>" value="update" name = "operationType">
                             <input type="display-name" id="<%= 'productName'+j %>" name="productName" value="<%= inventory[j].productName %>" readonly>
                               <input type="display-c" id="<%= 'quantity'+j %>" name="quantity" value="<%= inventory[j].quantity %>" readonly>
+                              <input type="display-c" id="<%= 'beginninginventory'+j %>" name="beginninginventory" value="<%= inventory[j].beginninginventory %>" readonly>
                               <input type="display-c" id="<%= 'purchaseunit'+j %>" name="purchaseunit" value="<%= inventory[j].purchaseunit %>" readonly>
+                              <input type="display-c" id="<%= 'inventoryunit1'+j %>" name="inventoryunit1" value="<%= inventory[j].inventoryunit1 %>" readonly>
+                              <input type="display-c" id="<%= 'inventoryunit2'+j %>" name="inventoryunit2" value="<%= inventory[j].inventoryunit2 %>" readonly>
                               <input type="hidden" id="<%= 'flavor'+j %>" name="flavor" value="<%= inventory[j].flavor %>" readonly>
                               <div class = "buttonbox">
                                 <button type="button" id= <%= 'edit' + j %> onclick="edit(this)">Edit</button>
@@ -327,7 +334,10 @@
                                       <input type="hidden" id="<%= "type" + k %>" value="update" name = "operationType">
                                       <input type="display-f" id="<%= 'flavor'+k %>" name="flavor" value="<%= inventory[k].flavor %>" readonly>
                                     <input type="display-c" id="<%= 'quantity'+k %>" name="quantity" value="<%= inventory[k].quantity %>" readonly>
+                                    <input type="display-c" id="<%= 'beginninginventory'+k %>" name="beginninginventory" value="<%= inventory[k].beginninginventory %>" readonly>
                                     <input type="display-c" id="<%= 'purchaseunit'+k %>" name="purchaseunit" value="<%= inventory[k].purchaseunit %>" readonly>
+                                    <input type="display-c" id="<%= 'inventoryunit1'+k %>" name="inventoryunit1" value="<%= inventory[k].inventoryunit1 %>" readonly>
+                                    <input type="display-c" id="<%= 'inventoryunit2'+k %>" name="inventoryunit2" value="<%= inventory[k].inventoryunit2 %>" readonly>
                                     <% displayed[k] = true; %>
                                       <div class = "buttonbox">
                                         <button type="button" id= <%= 'edit' + k %> onclick="edit(this)">Edit</button>
@@ -429,14 +439,20 @@ function transitionClosed(i){
           var productInput = document.getElementById('productName'+rownum);
           var quantityInput = document.getElementById('quantity'+rownum);
           var flavorInput = document.getElementById('flavor'+rownum);
+          var beginninginventoryInput = document.getElementById('beginninginventory'+rownum);
           var purchaseunitInput = document.getElementById('purchaseunit'+rownum);
+          var inventoryunit1Input = document.getElementById('inventoryunit1'+rownum);
+          var inventoryunit2Input = document.getElementById('inventoryunit2'+rownum);
           if (button.innerHTML == "Done") {
             productInput.readOnly = true;
             quantityInput.readOnly = true;
             flavorInput.readOnly = true;
+            beginninginventoryInput.readOnly = true
             purchaseunitInput.readOnly = true;
+            inventoryunit1Input.readOnly = true;
+            inventoryunit2Input.readOnly = true;
             // if the content was edited then update the database
-            if (content[rownum].product != productInput.value || content[rownum].quantity != quantityInput.value || content[rownum].flavor != flavorInput.value || content[rownum].purchaseunit != purchaseunitInput.value) {
+            if (content[rownum].product != productInput.value || content[rownum].quantity != quantityInput.value || content[rownum].flavor != flavorInput.value || content[rownum].beginninginventory != beginninginventoryInput.value || content[rownum].purchaseunit != purchaseunitInput.value || content[rownum].inventoryunit1 != inventoryunit1Input.value || content[rownum].inventoryunit2 != inventoryunit2Input.value) {
               var form = document.getElementById('form'+rownum);
               form.submit();
               console.log('submitted form');
@@ -444,7 +460,10 @@ function transitionClosed(i){
             productInput.style.background = "none";
             quantityInput.style.background = "none";
             flavorInput.style.background = "none";
+            beginninginventoryInput.style.background = "none"
             purchaseunitInput.style.background = "none";
+            inventoryunit1Input.style.background = "none";
+            inventoryunit2Input.style.background = "none";
             button.innerHTML = "Edit";
           }
           else {
@@ -455,11 +474,17 @@ function transitionClosed(i){
             productInput.readOnly = false;
             quantityInput.readOnly = false;
             flavorInput.readOnly = false;
+            beginninginventoryInput.readOnly = false;
             purchaseunitInput.readOnly = false;
+            inventoryunit1Input.readOnly = false;
+            inventoryunit2Input.readOnly = false;
             productInput.style.backgroundColor = "yellow";
             quantityInput.style.backgroundColor = "yellow";
             flavorInput.style.backgroundColor = "yellow";
+            beginninginventoryInput.style.backgroundColor = "yellow";
             purchaseunitInput.style.backgroundColor = "yellow";
+            inventoryunit1Input.style.backgroundColor = "yellow";
+            inventoryunit2Input.style.backgroundColor = "yellow";
             button.innerHTML = "Done";
           }
 };
