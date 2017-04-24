@@ -68,7 +68,6 @@ app.get('/manageVen', (req, res)=>{
   var cursor = db.collection(vendorTable).find();
   // console.log(cursor);  // This has too much info
   // convert to an array to extract the movie data
-  updatevenIds();
   cursor.toArray(function (err, results) {
     if (err)
       return console.log(err);
@@ -87,12 +86,11 @@ app.get('/manageVen', (req, res)=>{
 
 app.post('/updateordelete', (req, res) => {
   console.log(req.body);
-  console.log(num);
   console.log(ids[req.body.num]);
   if(req.body.operationType == "update"){
   db.collection(productTable).update(
     {_id: ids[req.body.num]}, // _id of element to be updated
-    {$set: {productName: req.body.productName, quantity: req.body.quantity, flavor: req.body.flavor, vendor: req.body.vendor, purchaseunit: req.body.purchaseunit}}
+    {$set: {productName: req.body.productName, quantity: req.body.quantity, flavor: req.body.flavor, vendor: req.body.vendor, purchaseunit: req.body.purchaseunit, inventoryunit1: req.body.inventoryunit1, inventoryunit2: req.body.inventoryunit2}}
     , (result) => {
     //  res.redirect('/manageInv');  // update the page
     });
@@ -110,23 +108,6 @@ app.post('/updateordelete', (req, res) => {
         }
       });
   }
-});
-
-app.post('/deleteVen', (req, res) => {
-  console.log(req.body);
-  console.log(venids[req.body.num]);
-    console.log("deleting something");
-    db.collection(vendorTable).remove(
-      {_id: venids[req.body.num]}, true, (error, result) => {
-        if (error !== null) {
-          console.log('[ERR] Failed to find item in num ' + req.body.num
-            + ' array of ids are:  ' + JSON.stringify(venids));
-        } else {
-          updatevenIds();
-          res.redirect('/manageVen');  // update the page
-        }
-      });
-
 });
 
 app.post('/addInv', (req, res) => {
@@ -148,28 +129,10 @@ app.post('/addVen', (req, res) => {
     if (err)
       return console.log(err);
     console.log('saved to database');
-    updatevenIds();
     res.redirect('/manageVen');
   });
 });
 
-//<<<<<<< HEAD
-//app.post('/deleteVen', (req, res) => {
-//  console.log(req.body);
-//  console.log(ids[req.body.num]);
-//  console.log("deleting something");
-//  db.collection(vendorTable).remove(
-//    {_id: ids[req.body.num]}, true, (error, result) => {
-//      if (error !== null) {
-//        console.log('[ERR] Failed to find item in num ' + req.body.num
-//          + ' array of ids are:  ' + JSON.stringify(ids));
-//      } else {
-//        updateIds();
-  //      res.redirect('/manageVen');  // update the page
-    //  }
-  //  });
-//});
-//=======
 app.post('/deleteVen', (req, res) => {
   console.log(req.body);
   console.log(ids[req.body.num]);
@@ -210,7 +173,6 @@ app.post('/deleteVen', (req, res) => {
   var db;
   // The ids of current entries in the database are keep in array ids.
   var ids = new Array();
-  var venids = new Array();
 
   var port = process.env.PORT || 3000; // || = or
 MongoClient.connect('mongodb://cguser:coffee1834@ds113680.mlab.com:13680/campusgrounds',
@@ -223,10 +185,6 @@ MongoClient.connect('mongodb://cguser:coffee1834@ds113680.mlab.com:13680/campusg
   updateIds((result)=>{
       console.log(result);
     });
-
-    updatevenIds((result)=>{
-        console.log(result);
-      });
 
   http.listen( port, function () {
     console.log('Listening on localhost ' + port);
@@ -247,19 +205,11 @@ function updateIds(callback) {
   });
 }
 
-
-function updatevenIds(callback) {
-
+function updateIdsVen(callback) {
   var cursor = db.collection(vendorTable).find();
   cursor.toArray(function (err, results) {
     if (err)
     return console.log(err);
-    venids = [];
-    for (var i = 0; i < results.length; i++) {
-      venids.push(results[i]._id);
-    }
-    if (typeof callback != 'undefined')
-      callback(venids);
     ids = [];
     for (var i = 0; i < results.length; i++) {
       ids.push(results[i]._id);
