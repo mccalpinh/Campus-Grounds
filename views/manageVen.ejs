@@ -152,7 +152,7 @@
        <li id="item<%=i%>">
          <form id="<%= 'form'+i %>" action="/deleteVen" method="post">
          <input type="display" name="vendorName" value="<%= vendor[i].vendorName %>" readonly>
-         <button type="button" class="dbutton" id=<%='delete' + i %> onclick="deleteVendor(this)">Delete</button>
+        <!-- <button type="button" class="dbutton" id=<%='delete' + i %> onclick="deleteVendor(this)">Delete</button>-->
          <input type="hidden" id="<%= "type" + i %>" value="delete" name = "operationType">
        </li>
        </form>
